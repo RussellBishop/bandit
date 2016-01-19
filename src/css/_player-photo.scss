@@ -1,0 +1,42 @@
+.player-photo {
+	position: relative;
+	width: 100%; height: 0; /* padding-bottom: percentage(170/150); */
+	
+	&:after {
+		@include absolute-centre; z-index: 2;
+		color: $default; font-weight: 300; font-size: 22px; text-align: center; letter-spacing: .1em;
+		content: attr(data-acronym);
+	}
+	
+	svg {
+		@include absolute-fill; z-index: 1;
+		
+		#border {
+			fill: $default;
+		}
+	}
+	
+	.photo-border {
+		@include absolute-fill;
+		border: 5px solid transparent;
+	}
+	
+	.photo {
+		@include absolute-fill; z-index: 3;
+		@include background-cover;
+		@include clip-hexagon;
+	}
+	
+	.colour {
+		@include absolute-fill;
+		background-color: $charade-3;
+		@include clip-hexagon;
+	}
+}
+
+.player-photo-inline {
+	@include inline-middle($up:true);
+	width: 20px; height: 22px;
+	@include background-cover;
+	@include clip-hexagon;
+}

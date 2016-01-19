@@ -1,0 +1,89 @@
+$mw-window: 1400px;
+$gutter: 15px;
+$jump: 32px;
+
+/**/
+
+@mixin clearfix {
+  zoom: 1; &:before, &:after { content: ""; display: table; } &:after { clear: both; }
+}
+
+@mixin no-text {
+	text-indent: 100%; white-space: nowrap; overflow: hidden;
+}
+
+@mixin no-content {
+	content: "";
+}
+
+/**/
+
+@mixin jump-responsive($property, $multiplier) {
+	#{$property}: round(32px * $multiplier);
+}
+
+@function jump($multiplier) {
+	@return round($jump * $multiplier);
+}
+
+@mixin gutter-responsive($property, $multiplier) {
+	#{$property}: round($gutter * $multiplier);
+}
+
+@function gutter($multiplier) {
+	@return round($gutter * $multiplier);
+}
+
+/**/
+
+@function fontsize($multiplier) {
+	@return round(16px * $multiplier);
+}
+
+/**/
+
+@mixin absolute-fill {	
+	position: absolute; top: 0; left: 0;
+	width: 100%; height: 100%;
+}
+
+@mixin absolute-centre {
+	position: absolute; top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@mixin absolute-centre-x {
+	position: absolute; left: 50%;
+	transform: translateX(-50%);
+}
+
+@mixin absolute-centre-y {
+	position: absolute; top: 50%;
+	transform: translateY(-50%);
+}
+
+@mixin inline-middle($up: false) {
+	display: inline-block; vertical-align: middle;
+	
+	@if $up {
+		position: relative; top: -2px;
+	}
+}
+
+/**/
+
+@mixin background-cover {
+	background-repeat: no-repeat; background-size: cover; background-position: center center;
+}
+
+/**/
+
+@mixin clip-hexagon {
+	clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/**/
+
+@mixin text-shadow1 {
+	text-shadow: 0px 1px 2px $shadow, 0 0 1px $shadow;
+}

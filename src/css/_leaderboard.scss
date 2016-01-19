@@ -1,0 +1,174 @@
+.leaderboard {
+	padding: $jump 13px;
+	
+	.h1 {
+		@include jump-responsive(margin-bottom, .5);
+	}
+	
+	li:not(:last-child) {
+		@include jump-responsive(margin-bottom, 1);
+	}
+}
+
+.position {
+	position: relative;
+	padding: 0 5%;
+	@include text-shadow1;
+
+	.col1 {
+		margin-right: 8px;
+	}
+
+	.player {
+
+		&-photo {
+			$width: 60px;
+			width: $width; height: $width*1.133;
+
+			.photo-border {
+				border-width: 3px;
+			}
+		}
+
+		&-info {
+			position: relative;
+			font-size: 13px; font-weight: normal; line-height: 1.3;
+
+			h1 {
+				font-weight: 500;
+			}
+		}
+
+		&-rating {
+			right: 5%;
+			font-size: 23px; font-weight: normal;
+		}
+	}
+
+	&.--you {
+		color: $shadow; text-shadow: none;
+
+		h1, h2, h3 {
+			color: inherit !important;
+		}
+	}
+
+
+	&.--level1 {
+		#border {
+			fill: $level1;
+		}
+
+		.player-level {
+			color: $level1;
+		}
+
+		&.--you {
+			.base {
+				background-color: $level1;
+			}
+		}
+	}
+
+	&.--level2 {
+		#border {
+			fill: $level2;
+		}
+
+		.player-level {
+			color: $level2;
+		}
+
+		&.--you {
+			.base {
+				background-color: $level2;
+			}
+		}
+	}
+
+	&.--level3 {
+
+		#border {
+			fill: $level3;
+		}
+
+		.player-level {
+			color: $level3;
+		}
+
+		&.--you {
+			.base {
+				background-color: $level3;
+			}
+		}
+	}
+
+	&.--level4 {
+
+		#border {
+			fill: $level4;
+		}
+
+		.player-level {
+			color: $level4;
+		}
+
+		&.--you {
+			.base {
+				background-color: $level4;
+			}
+		}
+	}
+
+	&.--level5 {
+
+		#border {
+			fill: $level5;
+		}
+
+		.player-level {
+			color: $level5;
+		}
+
+		&.--you {
+			.base {
+				background-color: $level5;
+			}
+		}
+	}
+
+	&.--level6 {
+
+		#border {
+			fill: $level6;
+		}
+
+		.player-level {
+			color: $level6;
+		}
+
+		&.--you {
+			.base {
+				background-color: $level6;
+			}
+		}
+	}
+
+	&.--level7 {
+
+		#border {
+			fill: $level7;
+		}
+
+		.player-level {
+			color: $level7;
+		}
+
+		&.--you {
+			.base {
+				background-color: $level7;
+			}
+		}
+	}
+
+}
