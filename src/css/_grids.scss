@@ -37,6 +37,18 @@
 	}
 		
 	> .col3 {
-		@include absolute-centre-y; right: 0;
+		float: right;
+	}
+}
+
+.g4 {
+	@include clearfix;
+	
+	> * {
+		float: left; width: calc((100% - 7px) / 2);
+
+		&:last-child {
+			float: right;
+		}
 	}
 }

@@ -12,8 +12,6 @@
 	
 	
 	
-	
-	
 	$matchId = $_POST['match-id'];
 	
 	// Get the match info
@@ -141,6 +139,6 @@
 	    
     }
 	
-	header('Location: /notifications.php');
+	header('Location: /matches.php?match='.$matchId);
 	
 ?>

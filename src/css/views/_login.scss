@@ -1,0 +1,20 @@
+.login {
+	.logo {
+		display: block; width: 80px; margin: 60px auto;
+	}
+}
+
+.login-form {
+
+	h1 {
+		@include jump-responsive(padding-bottom, 1.5);
+		text-align: center;
+	}
+
+	.row {
+		&:last-of-type {
+			padding-bottom: 28px;
+		}
+	}
+
+}

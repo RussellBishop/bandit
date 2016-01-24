@@ -1,0 +1,15 @@
+.spinner {
+	@include absolute-centre;
+	stroke-dasharray: 30;
+	animation: dash 8s infinite linear;
+  
+	polygon {
+		stroke: $bandit;
+	}
+}
+
+@keyframes dash {
+	to {
+		stroke-dashoffset: 1000;
+	}
+}

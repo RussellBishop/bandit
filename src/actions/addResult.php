@@ -2,22 +2,15 @@
 	
 	require_once($_SERVER['DOCUMENT_ROOT'].'/src/config.php');
 	
-	require_once($src.'libs/medoo/medoo.php');
-	
-	require_once($data.'database.php');
-	
-	require_once($src.'auth/authenticate.php');
-	
 	require_once($src.'libs/elo/rating.php');
 	
 
-	
-	
+	$datetime = $_POST['datetime'];
 	$opponent = $_POST['opponent'];
 	$outcome = $_POST['outcome'];
+
 	
-	
-	if ($outcome == '1') {
+	if ($outcome == 'won') {
 		
 		$winner = $you['id'];
 		$loser = $opponent;
@@ -28,6 +21,7 @@
 		
 		$loser = $you['id'];
 		$winner = $opponent;
+
 	}
 	
 	$winnerData = 
@@ -69,7 +63,8 @@
 	
 	
 	$newResult = $database->insert('matches',[
-		'datetime'					=> date("Y-m-d H:i:s"),
+		'datetime'					=> $datetime,
+		'sent-datetime'				=> date("Y-m-d H:i:s"),
 		'sent-by'					=> $you['id'],
 		'winner'					=> $winner,
 		'loser'						=> $loser,
@@ -79,12 +74,12 @@
 		'winner-new-rating'			=> $winnerNewRating,
 		'loser-new-rating'			=> $loserNewRating,
 	]);
-		
+
 	/*
 		When the match is ACCEPTED by the opponent, RE-CALCULATE THE NEW RATINGS due to possible multiple pending matches.
 	*/
-	
-	header('Location: /results.php');
+
+	header('Location: /index.php');
 	
 	
 	

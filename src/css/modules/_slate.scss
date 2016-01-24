@@ -1,0 +1,148 @@
+.slate {
+	position: relative;
+	display: block;
+	
+	.difference {
+		position: absolute; top: 50%;
+		transform: translateY(-50%);
+	}
+			
+	.meta {
+		@include absolute-centre-x;
+		line-height: 1;
+		
+		&.is--top {
+			top: 0;
+		}
+		
+		&.is--bottom {
+			bottom: -3px;
+		}
+		
+		&.is--pending {
+			color: $text;
+		}
+		
+		&.is--when {
+			color: $oslo-gray; 
+		}
+	}
+
+	.position-triangle {
+		svg {
+			polygon {
+				fill-opacity: .2;
+			}
+		}
+	}
+	
+	.base {
+		position: absolute; top: 50%; left: 0;
+		width: 100%; height: 49px;
+		background-color: $charade-2;
+		transform: translateY(-50%); border-radius: 3px;
+	}
+	
+	&.is--pending {
+		.base {
+			background-color: $charade-4;
+		}
+		
+		.player-photo {
+			.photo {
+				filter: grayscale(50%);
+			}
+		}
+	}
+}
+
+.slate.is--result {
+	$padding-from-centre: 34px;
+	$player-photo-width: 75px;
+
+	.player-photo {
+		$width: $player-photo-width;
+		width: $width; height: $width*1.133; margin: 0 auto;
+	}
+
+	.position-triangle {
+		@include absolute-centre-y;
+		width: calc(100% - #{$player-photo-width} - #{$padding-from-centre}); height: 16px;
+		text-align: center;
+		
+		svg {
+			display: inline-block;
+		}
+	}
+
+	.player {
+		position: relative;
+		
+		&.is--a {
+			padding-right: $padding-from-centre;
+			
+			.player-photo {
+				float: right;
+			}
+			
+			.difference {
+				right: 0;
+				border-radius: 0 6px 6px 6px;
+			}
+			
+			.position-triangle {
+				left: 0;
+			}
+		}
+		
+		&.is--b {
+			padding-left: $padding-from-centre;
+			
+			.player-photo {
+				float: left;
+			}
+			
+			.difference {
+				left: 0;
+				border-radius: 6px 0 6px 6px;
+			}
+			
+			.position-triangle {
+				right: 0;
+			}
+		}
+		
+		&.is--winner {
+			.player-photo {
+				#border {
+					fill: $win;
+				}
+			}
+			
+			.position-triangle {
+				#triangleUp {
+					fill: $win; fill-opacity: 1;
+				}
+			}
+		}
+		
+		&.is--loser {
+			.player-photo {
+				
+				.photo {
+					filter: grayscale(100%);
+				}
+
+				#border {
+					fill: $loss;
+				}
+			}
+			
+			.position-triangle {
+				#triangleDown {
+					fill: $loss; fill-opacity: 1;
+				}
+			}
+		}
+	}
+}

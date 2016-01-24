@@ -3,6 +3,7 @@
 	
 	.go-to-account {
 		position: relative;
+		display: block;
 	}
 	
 	.player {
@@ -35,7 +36,7 @@
 		&-level {
 			position: absolute; bottom: 0; left: 50%; z-index: 10;
 			padding: 0 16px;
-			line-height: $jump; font-weight: bold; font-size: 16px; color: $zircon; @include text-shadow1;
+			line-height: 32px; font-weight: bold; font-size: 16px; color: $zircon; @include text-shadow1;
 			background: $default;
 			box-shadow: 0px 1px 1px 0px $shadow, 0px 2px 5px 0px rgba($steel-gray,0.28); border-radius: 6px; transform: translate(-50%, 0);
 		}
@@ -45,6 +46,10 @@
 			background-color: $charade-2; border-top: 2px solid $default;
 			text-align: center; line-height: 1; color: $cadet-blue;
 			border-radius: 0 0 6px 6px;
+
+			a {
+				color: inherit;
+			}
 			
 			dt {
 				margin-bottom: 4px;
@@ -58,8 +63,8 @@
 		
 	}
 	
-	&.--level1 {
-		border-color: $level1;
+	&.is--level1 {
+		// border-color: $level1;
 		
 		.player-identity {
 			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level1,.1) 50%);
@@ -78,13 +83,13 @@
 		}
 		
 		.player-stats {
-			border-color: $level1;
+			// border-color: $level1;
 		}
 		
 	}
 
-	&.--level2 {
-		border-color: $level2;
+	&.is--level2 {
+		// border-color: $level2;
 		
 		.player-identity {
 			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level2,.1) 50%);
@@ -103,13 +108,13 @@
 		}
 		
 		.player-stats {
-			border-color: $level2;
+			// border-color: $level2;
 		}
 		
 	}
 
-	&.--level3 {
-		border-color: $level3;
+	&.is--level3 {
+		// border-color: $level3;
 		
 		.player-identity {
 			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level3,.1) 50%);
@@ -128,13 +133,13 @@
 		}
 		
 		.player-stats {
-			border-color: $level3;
+			// border-color: $level3;
 		}
 		
 	}
 
-	&.--level4 {
-		border-color: $level4;
+	&.is--level4 {
+		// border-color: $level4;
 		
 		.player-identity {
 			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level4,.1) 50%);
@@ -153,13 +158,13 @@
 		}
 		
 		.player-stats {
-			border-color: $level4;
+			// border-color: $level4;
 		}
 		
 	}
 
-	&.--level5 {
-		border-color: $level5;
+	&.is--level5 {
+		// border-color: $level5;
 		
 		.player-identity {
 			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level5,.1) 50%);
@@ -172,7 +177,7 @@
 		.player-photo {
 			svg {
 				#border {
-					fill: $level5;
+					// fill: $level5;
 				}
 			}
 		}
@@ -183,8 +188,8 @@
 		
 	}
 
-	&.--level6 {
-		border-color: $level6;
+	&.is--level6 {
+		// border-color: $level6;
 		
 		.player-identity {
 			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level6,.1) 50%);
@@ -203,13 +208,13 @@
 		}
 		
 		.player-stats {
-			border-color: $level6;
+			// border-color: $level6;
 		}
 		
 	}
 
-	&.--level7 {
-		border-color: $level7;
+	&.is--level7 {
+		// border-color: $level7;
 		
 		.player-identity {
 			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level7,.1) 50%);
@@ -228,7 +233,7 @@
 		}
 		
 		.player-stats {
-			border-color: $level7;
+			// border-color: $level7;
 		}
 		
 	}

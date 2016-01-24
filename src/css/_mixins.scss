@@ -1,6 +1,6 @@
 $mw-window: 1400px;
 $gutter: 15px;
-$jump: 32px;
+$jump: 16px;
 
 /**/
 
@@ -19,7 +19,7 @@ $jump: 32px;
 /**/
 
 @mixin jump-responsive($property, $multiplier) {
-	#{$property}: round(32px * $multiplier);
+	#{$property}: round($jump * $multiplier);
 }
 
 @function jump($multiplier) {

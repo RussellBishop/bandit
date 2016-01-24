@@ -15,7 +15,7 @@ class Rating
     /**
      * @var int The K Factor used.
      */
-    const KFACTOR = 160; /* default 16 */
+    const KFACTOR = 24;
 
     /**
      * Protected & private variables.

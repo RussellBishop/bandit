@@ -12,7 +12,7 @@
 		// Guest
 		require('src/template/header.php');
 		
-		echo "You're not logged in!";
+		header('Location: login.php');
 
 	}
 	

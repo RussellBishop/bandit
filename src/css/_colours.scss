@@ -25,6 +25,7 @@ $emerald: #2FCC63;
 $sea-green: #2D9255;
 
 $cinnibar: #E74C3C;
+$thunder: #35292F;
 
 /**/
 
@@ -38,6 +39,8 @@ $level6: #FA2B7A;
 
 $level7: #FF6200;
 
+$bandit: $level7;
+
 
 /**/
 
@@ -45,6 +48,7 @@ $win: $emerald;
 $win-dark: $sea-green;
 
 $loss: $cinnibar;
+$loss-dark: $thunder;
 
 /**/
 
@@ -53,5 +57,5 @@ $shadow: $shark;
 
 $text: $link-water;
 
-$button: $kashmir-blue;
+$button: $bandit;
 $button-hover: lighten(saturate($button, 1), 3);

@@ -7,13 +7,11 @@
 	require_once($data.'database.php');
 	
 	require_once($src.'auth/authenticate.php');
-	
-	
-	
-	
-	if ($_POST['fullName'] != $you['name']) {
-		
-		// Update Player Name
+
+
+
+	if (!empty($_POST['fullName'])) {
+
 		$database->update('players',
 		
 			[
@@ -21,14 +19,45 @@
 			],
 			
 			[
-				'id' => $you['name']
+				'id' => $you['id']
 			]
 			
 		);
-	
+
 	}
-	
-	
+
+	if (!empty($_POST['email'])) {
+
+		$database->update('players',
+		
+			[
+				'email' => $_POST['email']
+			],
+			
+			[
+				'id' => $you['id']
+			]
+			
+		);
+
+	}
+
+	if (!empty($_POST['password'])) {
+
+		$database->update('players',
+		
+			[
+				'password' => $_POST['password']
+			],
+			
+			[
+				'id' => $you['id']
+			]
+			
+		);
+
+	}
+
 	if (!empty($_FILES['player-photo']['name'])) {
 		
 		// crop1.png
@@ -42,9 +71,11 @@
 		
 		// player1-20160113231521.png
 		$newFileName				= 'player' . $you['id'] . '-' . date('YmdHis') . '.' . $uploadedPhotoFiletype;
+		$thumbFileName				= 'thumb-' . $newFileName;
 		
 		// /Library/WebServer/Documents/bandit/upload/player-photo/player1-20160113231521.png
-		$newFilePath				= $playerPhotoDirectory . 'player' . $you['id'] . '-' . date('YmdHis') . '.' . $uploadedPhotoFiletype;
+		$newFilePath				= $playerPhotoDirectory . $newFileName;
+		$thumbFilePath				= $playerPhotoDirectory . $thumbFileName;
 		
 		// Upload is OK
 		$uploadOk					= 1;
@@ -98,12 +129,24 @@
 		else {
 			
 		    if (move_uploaded_file($_FILES['player-photo']['tmp_name'], $newFilePath)) {
-			    
+
+		    	// Include the class
+				include($functions.'photoResize.php');
+
+				// 1) Initialise / load image
+				$resizeObj = new resize($newFilePath);
+
+				// 2) Resize image (options: exact, portrait, landscape, auto, crop)
+				$resizeObj -> resizeImage(170, 170, 'crop');
+
+				// 3) Save image
+				$resizeObj -> saveImage($thumbFilePath, 100);
+
 		        // Update Player Photo Path
 				$database->update('players',
 				
 					[
-						'photo' => $newFileName
+						'photo' => $thumbFileName
 					],
 					
 					[
@@ -111,9 +154,9 @@
 					]
 					
 				);
-				
-				header('Location: /');
-		        
+
+				// Delete the fullsize image
+				unlink($newFilePath);
 		        
 		    } else {
 			    
@@ -123,5 +166,7 @@
 		}
 	
 	}
+
+	header('Location: /');
 	
 ?>

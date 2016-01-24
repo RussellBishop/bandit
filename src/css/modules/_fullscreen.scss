@@ -1,0 +1,25 @@
+.fullscreen {
+	@include absolute-fill; position: fixed; z-index: 100;
+	background: rgba($shadow, 1);
+
+	&.is--loading {
+
+		&.is--loaded {
+			animation: .3s ease-in fadeAway; animation-iteration-count: 1; animation-fill-mode: forwards;
+		}	
+
+	}
+}
+
+@keyframes fadeAway {
+	0% {
+		opacity: 1;
+	}
+	99% {
+		opacity: 0; z-index: 100;
+	}
+	100% {
+		opacity: 0;
+		display: none; visibility: hidden; z-index: -100;
+	}
+}

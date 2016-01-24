@@ -6,14 +6,18 @@
 	}
 	
 	li:not(:last-child) {
-		@include jump-responsive(margin-bottom, 1);
+		@include jump-responsive(margin-bottom, .5);
 	}
 }
 
-.position {
+.slate.is--position {
 	position: relative;
-	padding: 0 5%;
+	padding: 0 2%;
 	@include text-shadow1;
+
+	@media (min-width: 350px) {
+		padding: 0 5%;
+	}
 
 	.col1 {
 		margin-right: 8px;
@@ -39,22 +43,80 @@
 			}
 		}
 
+		&-level {
+			color: $default;
+		}
+
 		&-rating {
-			right: 5%;
+			position: relative; top: 22px;
 			font-size: 23px; font-weight: normal;
+
+			h3, .position-triangle {
+				@include inline-middle;
+			}
 		}
 	}
 
-	&.--you {
+	&.is--winner {
+		.position-triangle {
+			#triangleUp {
+				fill: $win; fill-opacity: 1;
+			}
+		}
+	}
+
+	&.is--loser {
+		.position-triangle {
+			#triangleDown {
+				fill: $loss; fill-opacity: 1;
+			}
+		}
+	}
+
+	&.is--you {
 		color: $shadow; text-shadow: none;
 
 		h1, h2, h3 {
 			color: inherit !important;
 		}
+
+		&.is--winner, &.is--loser {
+			.position-triangle {
+
+				#triangleUp, #triangleDown {
+					fill: $shadow;
+				}
+			}
+		}
+
+		&.is--winner {
+			.position-triangle {
+				#triangleUp {
+					fill-opacity: 1;
+				}
+			}
+		}
+
+		&.is--loser {
+			.position-triangle {
+				#triangleDown {
+					fill-opacity: 1;
+				}
+			}
+		}
 	}
 
+	&.is--level0 {
 
-	&.--level1 {
+		&.is--you {
+			.base {
+				background-color: $default;
+			}
+		}
+
+	}
+
+	&.is--level1 {
 		#border {
 			fill: $level1;
 		}
@@ -63,14 +125,14 @@
 			color: $level1;
 		}
 
-		&.--you {
+		&.is--you {
 			.base {
 				background-color: $level1;
 			}
 		}
 	}
 
-	&.--level2 {
+	&.is--level2 {
 		#border {
 			fill: $level2;
 		}
@@ -79,14 +141,14 @@
 			color: $level2;
 		}
 
-		&.--you {
+		&.is--you {
 			.base {
 				background-color: $level2;
 			}
 		}
 	}
 
-	&.--level3 {
+	&.is--level3 {
 
 		#border {
 			fill: $level3;
@@ -96,14 +158,14 @@
 			color: $level3;
 		}
 
-		&.--you {
+		&.is--you {
 			.base {
 				background-color: $level3;
 			}
 		}
 	}
 
-	&.--level4 {
+	&.is--level4 {
 
 		#border {
 			fill: $level4;
@@ -113,14 +175,14 @@
 			color: $level4;
 		}
 
-		&.--you {
+		&.is--you {
 			.base {
 				background-color: $level4;
 			}
 		}
 	}
 
-	&.--level5 {
+	&.is--level5 {
 
 		#border {
 			fill: $level5;
@@ -130,14 +192,14 @@
 			color: $level5;
 		}
 
-		&.--you {
+		&.is--you {
 			.base {
 				background-color: $level5;
 			}
 		}
 	}
 
-	&.--level6 {
+	&.is--level6 {
 
 		#border {
 			fill: $level6;
@@ -147,14 +209,14 @@
 			color: $level6;
 		}
 
-		&.--you {
+		&.is--you {
 			.base {
 				background-color: $level6;
 			}
 		}
 	}
 
-	&.--level7 {
+	&.is--level7 {
 
 		#border {
 			fill: $level7;
@@ -164,7 +226,7 @@
 			color: $level7;
 		}
 
-		&.--you {
+		&.is--you {
 			.base {
 				background-color: $level7;
 			}

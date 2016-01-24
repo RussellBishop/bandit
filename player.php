@@ -1,11 +1,11 @@
 <?php
 
-	$view = 'profile';
-
 	require_once('src/config.php');
 
 	require_once($data.'players.php');
-	require_once($data.'ratings.php');	
+	require_once($data.'ratings.php');
+	
+	require_once($src.'auth/authenticate.php');
 	
 	require_once($functions.'functions.php');
 	
@@ -15,8 +15,8 @@
 ?>
 
 <?php
-
-	$playerId = $you['id'];
+	
+	$playerId = $_GET['player'];
 	require($template.'playerProfile.php');
 
 ?>

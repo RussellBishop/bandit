@@ -1,4 +1,4 @@
-@import "reset";
+// critical @import "reset";
 
 @import "mixins";
 @import "colours";
@@ -11,11 +11,18 @@
 
 @import "forms";
 
-@import "player-photo";
-@import "player-card";
+// critical @import "modules/fullscreen";
+// critical @import "modules/loading";
 
-@import "results";
+@import "modules/menu";
+@import "modules/slate";
+@import "modules/player-photo";
+@import "modules/player-card";
 
-@import "leaderboard";
+@import "views/results";
+@import "views/login";
+@import "views/match";
+
+@import "views/leaderboard";
 
 @import "fonts";

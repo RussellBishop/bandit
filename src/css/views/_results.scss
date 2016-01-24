@@ -1,0 +1,11 @@
+.results {
+	padding: $jump 13px;
+	
+	.h1 {
+		@include jump-responsive(margin-bottom, .5);
+	}
+	
+	li:not(:last-child) {
+		@include jump-responsive(margin-bottom, 1);
+	}
+}

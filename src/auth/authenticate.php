@@ -31,17 +31,20 @@
 	if (isset($_SESSION['player'])) {
 		
 		// We're logged in
-		
-		require_once($_SERVER['DOCUMENT_ROOT'].'/src/data/you.php');
+		require_once($data.'you.php');
 		
 	} else {
+
+		require_once($data.'players.php');
 		
 		// Guest
-		require($_SERVER['DOCUMENT_ROOT'].'/src/template/header.php');
-		require($_SERVER['DOCUMENT_ROOT'].'/src/template/login.php');
-	
-		die();
+		require($template.'header.php');
+		require($template.'login.php');
 
+		require($template.'footer.php');
+		require($template.'endHtml.php');
+
+		die();
 	}
 	
 ?>

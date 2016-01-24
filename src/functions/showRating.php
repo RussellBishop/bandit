@@ -1,20 +1,10 @@
 <?php
 
-	function showRating($you) {
+	function showRating($id) {
 		
 		global $database;
-		
-		$matchesPlayed = $database->count('matches',
-			[
-				'AND' => [
-					'OR' => [
-						'winner' => $you['id'],
-						'loser' => $you['id']
-					],
-					'accepted' => '1',
-				],
-			]
-		);
+
+		$matchesPlayed = matchesPlayed($id);
 		
 		if ($matchesPlayed < 10) {
 			
@@ -31,7 +21,7 @@
 				],
 				
 				[
-					'id' => $you['id']
+					'id' => $id
 				]
 				
 			);
