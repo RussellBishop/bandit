@@ -6,26 +6,30 @@
 		
 		// Did they just submit the form?
 		$player = $_POST['player'];
-		$password = $_POST['password'];
+		$plainTextPassword = $_POST['password'];
+
+		$player = $database->get('players',
 		
-		$exists = $database->has('players', [
-			"AND" => [
-				'id' => $player,
-				'password' => $password,
+			[
+				'id', 'password'
+			],
+			
+			[
+				'id' => $player
 			]
-		]);
+			
+		);
+
+		if (password_verify($plainTextPassword, $player['password'])) { 
+
+		    $_SESSION['player'] = $player;
+
+		} else { 
+
+		    echo 'Invalid password.'; 
+
+		} 		
 		
-		if ($exists == 1) {
-			
-			$_SESSION['player'] = $player;
-			
-		}
-		
-		else {
-			
-			echo "Invalid Login Credentials.";
-			
-		}
 	}
 
 	if (isset($_SESSION['player'])) {

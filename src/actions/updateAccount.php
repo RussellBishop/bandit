@@ -44,10 +44,13 @@
 
 	if (!empty($_POST['password'])) {
 
+		$plainTextPassword = $_POST['password'];
+		$hashedPassword = password_hash($plainTextPassword, PASSWORD_DEFAULT);
+
 		$database->update('players',
 		
 			[
-				'password' => $_POST['password']
+				'password' => $hashedPassword
 			],
 			
 			[
