@@ -14,6 +14,18 @@
 
 	$playerStats = playerStats($player['id']);
 
+	$matchesPlayed = $database->count('matches',
+		[
+			'AND' => [
+				'OR' => [
+					'winner' => $player['id'],
+					'loser' => $player['id']
+				],
+				'accepted' => '1',
+			],
+		]
+	);
+
 ?>
 
 <figure class="block player-card is--level<?=$playerStats['levelId']?>">
@@ -46,164 +58,23 @@
 	
 	</header>
 	
-	<ul class="g1 player-stats">
-		
-		<li>
-			<dt>Rating</dt>
-			<dd><?=$playerStats['rating']?></dd>
-		</li>
-		
-		<li>
-			<dt>Position</dt>
-			<dd><a href="leaderboard.php">#<?php playerPosition($player['rating']); ?></a></dd>
-		</li>
-		
-		<li>
-			<dt>Win Ratio</dt>
-			<dd><?php winLossRatio($player['id']);?></dd>
-		</li>
+	<?php
 
-    </ul>
+		if ($matchesPlayed > 9) {
+			include($template.'playerStats.php');
+		}
+
+	?>
     
 </figure>
 
-<?php if ($player['id'] == $you['id']) { ?>
+<?php
 
-<a href="/add-result.php" class="block button">Add Result</a>
+	if ($matchesPlayed > 9) {
+		include($template.'playerStatsExtra.php');
+	}
 
-<?php } ?>
-
-<ol class="block table">
-	
-	<li class="row">
-		<h3 class="h4">Games played:</h4>
-		<p>
-			<?php
-				
-		    	$gamesPlayed = $database->count('matches',
-					[
-						'id',
-					],
-					
-					[
-						'AND' => [
-							'OR' => [
-								'winner' => $player['id'],
-								'loser' => $player['id']
-							],
-							'accepted' => '1',
-						],
-					]
-				);
-				
-				$gamesWon = $database->count('matches',
-					[
-						'id',
-					],
-					
-					[
-						'AND' => [
-							'winner' => $player['id'],
-							'accepted' => '1',
-						],
-					]
-				);
-				
-				$gamesLost = $database->count('matches',
-					[
-						'id',
-					],
-					
-					[
-						'AND' => [
-							'loser' => $player['id'],
-							'accepted' => '1',
-						],
-					]
-				);
-				
-				echo $gamesPlayed .' Total (' .$gamesWon.' won / ' .$gamesLost.' lost)';
-				
-			?>
-		</p>
-	</li>
-
-	<?php
-				
-    	$bestWin = $database->select('matches',
-			[
-				'[><]players (winner)' => ['winner' => 'id'],
-				'[><]players (loser)' => ['loser' => 'id'],
-			],
-			
-			[
-				'matches.id',
-				'matches.datetime',
-				'matches.sent-by',
-				'winner.id(winner-id)',
-				'loser.id(loser-id)',
-				'winner.name(winner-name)',
-				'loser.name(loser-name)',
-				'loser.photo(loser-photo)',
-				'matches.winner',
-				'matches.loser',
-				'matches.accepted',
-				'matches.declined',
-				'matches.winner-original-rating',
-				'matches.loser-original-rating',
-			],
-			
-			[
-				'AND' => [
-					'OR' => [
-						'winner' => $player['id']
-					],
-					'accepted' => '1',
-				],
-				
-				"ORDER" => "matches.loser-original-rating DESC",
-				"LIMIT" => 1
-			]
-			
-		);
-
-		if (!empty($bestWin)) { ?>
-	
-	<li class="row">
-		<h3 class="h4">Best win:</h3>
-		<p>
-			<?php
-
-				echo '<a href="/result.php?result=' .$bestWin[0]['id']. '">';
-				echo 'Versus. ';
-				playerPhotoInline($bestWin[0]['loser-id']);
-				echo ' ' .$bestWin[0]['loser-name']. ' (' ;
-				playerStats($bestWin[0]['loser-id']);
-				echo '</a>';
-				
-			?>
-		</p>
-	</li>
-
-	<?php } ?>
-
-	<?php
-	/*
-	
-	<li>
-		<h3 class="h3">Best streak:</h3>
-		<p>X games over Y period</p>
-	</li>
-
-	<li>
-		<h3 class="h3">Reputation:</h3>
-		<p>Perfect</p>
-	</li>
-
-	*/
-	?>
-	
-</ol>
+?>
 
 <section class="block results">
     
