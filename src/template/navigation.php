@@ -30,7 +30,8 @@
 
 
 		<ul>
-			<li><a href="/">Profile</a></li>
+			<li><a href="/">My Profile</a></li>
+			<li><a href="/add-result.php">Add Result</a></li>
 			<li><a href="/matches.php">Matches <?php if ($notifications>0) { echo '('.$notifications.')'; } ?></a></li>
 			<li><a href="/leaderboard.php">Leaderboard</a></li>
 			<li><a href="/account.php">Account</a></li>
