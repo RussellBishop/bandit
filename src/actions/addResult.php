@@ -29,7 +29,7 @@
 		$database->get("players",
 		
 			[
-				'id', 'rating'
+				'id', 'name', 'rating', 'email'
 			],
 		
 			[
@@ -43,7 +43,7 @@
 		$database->get("players",
 		
 			[
-				'id', 'rating'
+				'id', 'rating', 'email'
 			],
 		
 			[
@@ -75,11 +75,24 @@
 		'loser-new-rating'			=> $loserNewRating,
 	]);
 
+
+	/*
+	$to      = 'nobody@example.com';
+	$subject = 'New result sent by '.$winnerData['name'];
+	$message = 'hello';
+	$headers = 'From: noreply@russellbishop.co.uk' . "\r\n" .
+	    'Reply-To: noreply@russellbishop.co.uk' . "\r\n" .
+	    'X-Mailer: PHP/' . phpversion();
+
+	mail($to, $subject, $message, $headers);
+	*/
+
+
 	/*
 		When the match is ACCEPTED by the opponent, RE-CALCULATE THE NEW RATINGS due to possible multiple pending matches.
 	*/
 
-	header('Location: /index.php');
+	header('Location: /match.php?match='.$newResult);
 	
 	
 	
