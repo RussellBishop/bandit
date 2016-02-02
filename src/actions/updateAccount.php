@@ -105,7 +105,7 @@
 		}
 		
 		// Check file size
-		if ($_FILES['player-photo']['size'] > 1000000) {
+		if ($_FILES['player-photo']['size'] > 4000000) {
 			
 		    echo 'Sorry, your file is too large.';
 		    $uploadOk = 0;
