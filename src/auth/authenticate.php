@@ -26,7 +26,7 @@
 
 		} else { 
 
-		    echo 'Invalid password.'; 
+		    echo '<aside class="prompt is--prompted is--warning">Invalid password.</aside>'; 
 
 		} 		
 		
