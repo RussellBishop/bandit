@@ -11,12 +11,15 @@
 	
 	require($template.'header.php');
 	require($template.'navigation.php');
-	
+
+
+
 ?>
 
 <?php
-
+	
 	$playerId = $you['id'];
+
 	require($template.'playerProfile.php');
 
 ?>
