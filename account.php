@@ -18,6 +18,10 @@
 	
 ?>
 
+<aside class="prompt">
+	<p>Got your image - now hit Update Profile</p>
+</aside>
+
 <form id="updateAccount" class="block table account" method="post" action="<?=$actions?>updateAccount.php" enctype="multipart/form-data">
 	
 	<fieldset class="row is--photo">
@@ -26,7 +30,7 @@
 
 			<?php playerPhoto($you['id']); ?>
 
-			<input type="file" name="player-photo" id="player-photo">
+			<input type="file" name="player-photo" id="player-photo" accept="image/*">
 
 		</label>
 		
@@ -52,9 +56,13 @@
 		<input type="password" name="password" id="password" />
 		
 	</fieldset>
+
+	<fieldset class="row">
 	
-	<button class="button" type="submit">Update my profile</button>
-	
+		<button class="button" type="submit">Update my profile</button>
+
+	</fieldset>
+		
 </form>
 
 <a href="/logout.php">Logout</a>
@@ -64,8 +72,6 @@
 	require($template.'footer.php');
 
 ?>
-
-<script src="<?=$js;?>global.min.js"></script>
 
 <?php
 
