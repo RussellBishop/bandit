@@ -31,11 +31,11 @@
 		);
 		
 		if ($losses > 0) {
-			echo (float)number_format(($wins/$losses), 2, '.', '');
+			return (float)number_format(($wins/$losses), 2, '.', '');
 		}
 		
 		else {
-			echo '0';
+			return '0';
 		}
 		
 	}

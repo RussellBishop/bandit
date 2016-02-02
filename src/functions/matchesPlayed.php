@@ -16,7 +16,7 @@
 			]
 		);
 
-		echo $matchesPlayed;
+		return $matchesPlayed;
 
 	}
 
