@@ -9,10 +9,7 @@
 <?php if ($view == 'account') { echo '<link href="/src/css/account.css" type="text/css" rel="stylesheet" />'; } ?>
 
 <style>
-<?php
-$criticalCss = file_get_contents($src.'css/critical.css');
-echo $criticalCss;
-?>
+<?php echo file_get_contents($src.'css/critical.css'); ?>
 </style>
 
 <link href="/src/css/screen.css" type="text/css" rel="stylesheet" />
