@@ -16,6 +16,10 @@
 
 	$matchId = $_GET['match'];
 
+	if (empty($matchId)) {
+		header('Location: /matches.php');
+	}
+
 	$match = $database->select('matches',
 		[
 			'[><]players (sent-by)' => ['sent-by' => 'id'],
