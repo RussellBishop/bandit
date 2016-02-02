@@ -8,17 +8,8 @@
 	
 	require($template.'header.php');
 	require($template.'navigation.php');
-	
-?>
 
-<article class="block leaderboard">
 
-	<h1 class="h1">Leaderboard</h1>
-	
-	<ol>
-	
-	<?php
-	
 	$leaderboardPlayers = $database->select('players',
 	
 		[
@@ -31,21 +22,21 @@
 		
 	);
 	
+?>
+
+<article class="block leaderboard">
+
+	<h1 class="h1">Leaderboard</h1>
+	
+	<ol>
+	
+	<?php
+	
 	foreach ($leaderboardPlayers as $player) {
 
-		$matchesPlayed = $database->count('matches',
-			[
-				'AND' => [
-					'OR' => [
-						'winner' => $player['id'],
-						'loser' => $player['id']
-					],
-					'accepted' => '1',
-				],
-			]
-		);
+		$matchesPlayed = matchesPlayed($player['id']);
 
-		if ($matchesPlayed > 0) {
+		if ($matchesPlayed > 9) {
 
 			$playerStats = playerStats($player['id']);
 
@@ -127,19 +118,7 @@
 	<ol>
 	
 	<?php
-	
-	$leaderboardPlayers = $database->select('players',
-	
-		[
-			'id', 'name', 'photo', 'rating'
-		],
 		
-		[
-			"ORDER" => ['rating DESC']
-		]
-		
-	);
-	
 	foreach ($leaderboardPlayers as $player) {
 
 		$matchesPlayed = $database->count('matches',
@@ -154,7 +133,7 @@
 			]
 		);
 
-		if ($matchesPlayed == 0) {
+		if ($matchesPlayed < 10) {
 
 			$playerStats = playerStats($player['id']);
 
