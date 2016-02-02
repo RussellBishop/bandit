@@ -4,17 +4,7 @@ function playerStats($id) {
 
 	global $database;
 
-	$matchesPlayed = $database->count('matches',
-		[
-			'AND' => [
-				'OR' => [
-					'winner' => $id,
-					'loser' => $id
-				],
-				'accepted' => '1',
-			],
-		]
-	);
+	$matchesPlayed = matchesPlayed($id);
 
 	// played less than 10 games?
 	if ($matchesPlayed < 10) {
@@ -40,11 +30,10 @@ function playerStats($id) {
 			]
 		);
 
-		// get best rated player
-		$highestRating = $database->max('players', 'rating');
+		$playerPosition = playerPosition($id);
 
 		// if this is you, you're the bandit
-		if ($highestRating == $player['rating']) {
+		if ($playerPosition == 1) {
 
 			return [
 			   'levelId' => 7,
@@ -54,7 +43,7 @@ function playerStats($id) {
 
 		}
 
-		// not the highest rated? assign a level
+		// not #1? assign a level
 		else {
 
 			if ((0 <= $player['rating']) && ($player['rating'] <= 849)) {

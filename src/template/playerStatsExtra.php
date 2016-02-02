@@ -99,12 +99,12 @@
 			<p>
 				<?php
 
-					echo '<a href="/result.php?result=' .$bestWin[0]['id']. '">';
+					$bestLoserStats = playerStats($bestWin[0]['loser-id']);
+
+					echo '<a href="/match.php?match=' .$bestWin[0]['id']. '">';
 					echo 'Versus. ';
 					playerPhotoInline($bestWin[0]['loser-id']);
-					echo ' ' .$bestWin[0]['loser-name']. ' (' ;
-					playerStats($bestWin[0]['loser-id']);
-					echo '</a>';
+					echo ' ' .$bestWin[0]['loser-name']. ' ('.$bestLoserStats['rating'].')</a>';
 					
 				?>
 			</p>

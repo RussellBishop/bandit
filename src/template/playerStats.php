@@ -7,12 +7,12 @@
 	
 	<li>
 		<dt>Position</dt>
-		<dd><a href="leaderboard.php">#<?php playerPosition($player['rating']); ?></a></dd>
+		<dd><a href="leaderboard.php">#<?php echo playerPosition($player['id']); ?></a></dd>
 	</li>
 	
 	<li>
 		<dt>Win Ratio</dt>
-		<dd><?php winLossRatio($player['id']);?></dd>
+		<dd><?php echo winLossRatio($player['id']);?></dd>
 	</li>
 
 </ul>
