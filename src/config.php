@@ -20,6 +20,7 @@
 	
 	date_default_timezone_set('Europe/London');
 	
+	// load medoo and get database info
 	require_once($src.'libs/medoo/medoo.php');
 	require_once($data.'database.php');
 
