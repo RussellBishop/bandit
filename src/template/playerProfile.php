@@ -14,17 +14,7 @@
 
 	$playerStats = playerStats($player['id']);
 
-	$matchesPlayed = $database->count('matches',
-		[
-			'AND' => [
-				'OR' => [
-					'winner' => $player['id'],
-					'loser' => $player['id']
-				],
-				'accepted' => '1',
-			],
-		]
-	);
+	$matchesPlayed = matchesPlayed($player['id']);
 
 ?>
 
@@ -175,7 +165,7 @@
 								playerPhoto($result['winner-id']);
 								
 								echo '
-								<div class="difference">+'. $result['difference']*5 .'</div>
+								<div class="difference">+<span class="count">'. $result['difference']*5 .'</span></div>
 							</div>
 							
 							<div class="col2 player is--b is--loser">
@@ -187,7 +177,7 @@
 								playerPhoto($result['loser-id']);
 								
 								echo '
-								<div class="difference">-'. $result['difference']*5 .'</div>
+								<div class="difference">-<span class="count">'. $result['difference']*5 .'</span></div>
 							</div>
 						
 						<p class="meta is--bottom is--when">'. timeSince(strtotime($result['datetime'])) .' ago</p>
