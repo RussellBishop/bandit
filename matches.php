@@ -60,7 +60,7 @@
 		<h1 class="h1">Pending</h1>';
 		
 		foreach ($pendingResults as $pendingResult) {
-			
+
 			echo '
 				
 				<li>
@@ -142,6 +142,9 @@
 		);
 		
 		foreach ($matches as $match) {
+
+			$winnerLevelId =  playerStats($match['winner-id']);
+			$loserLevelId =  playerStats($match['loser-id']);
 			
 			echo '
 				<li>
@@ -158,7 +161,7 @@
 								playerPhoto($match['winner-id']);
 								
 								echo '
-								<div class="difference">+'. $match['difference']*5 .'</div>
+								<div class="difference">+<span class="count">'. $match['difference']*5 .'</span></div>
 							</div>
 							
 							<div class="col2 player is--b is--loser">
@@ -170,7 +173,7 @@
 								playerPhoto($match['loser-id']);
 								
 								echo '
-								<div class="difference">-'. $match['difference']*5 .'</div>
+								<div class="difference">-<span class="count">'. $match['difference']*5 .'</span></div>
 							</div>
 						
 						<p class="meta is--bottom is--when">'. timeSince(strtotime($match['datetime'])) .' ago</p>
