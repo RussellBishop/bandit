@@ -16,7 +16,7 @@
 		
 		&-photo {
 			$width: 150px;
-			display: inline-block; width: $width; height: $width*1.133;
+			display: inline-block; width: $width; height: $width*1.133; padding-bottom: 0;
 			
 			&:after {
 				font-size: 44px;

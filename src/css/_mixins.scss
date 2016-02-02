@@ -34,6 +34,10 @@ $jump: 16px;
 	@return round($gutter * $multiplier);
 }
 
+@mixin gutter {
+	padding-left: 4%; padding-right: 4%;
+}
+
 /**/
 
 @function fontsize($multiplier) {
@@ -68,6 +72,11 @@ $jump: 16px;
 	@if $up {
 		position: relative; top: -2px;
 	}
+}
+
+@mixin fixed-top {
+	position: fixed; top: 0; left: 0;
+	width: 100%;
 }
 
 /**/

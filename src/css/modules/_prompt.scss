@@ -1,0 +1,14 @@
+.prompt {
+	@include fixed-top; z-index: 75;
+	display: none; @include gutter;
+	background: $kashmir-blue;
+	line-height: 42px;
+
+	&.is--prompted {
+		display: block;
+	}
+
+	&.is--warning {
+		background: #8C3F3C;
+	}
+}

@@ -48,11 +48,14 @@
 			background-color: $charade-4;
 		}
 		
+		
+		/*
 		.player-photo {
 			.photo {
 				filter: grayscale(50%);
 			}
 		}
+		*/
 	}
 }
 
@@ -62,7 +65,7 @@
 
 	.player-photo {
 		$width: $player-photo-width;
-		width: $width; height: $width*1.133; margin: 0 auto;
+		width: $width; height: $width*1.133; padding-bottom: 0; margin: 0 auto;
 	}
 
 	.position-triangle {
@@ -145,4 +148,25 @@
 			}
 		}
 	}
+
+	/*
+	Animations looked rubbish/uneven
+
+	&:not(.is--pending) {
+		.player {
+
+			&.is--winner {
+				.difference {
+					animation: 2s ease-in floatUp; animation-iteration-count: 1; animation-fill-mode: forwards;
+				}
+			}
+
+			&.is--loser {
+				.difference {
+					animation: 2s ease-in floatDown; animation-iteration-count: 1; animation-fill-mode: forwards;
+				}
+			}
+		}
+	}
+	*/
 }

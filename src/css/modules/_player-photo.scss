@@ -1,6 +1,6 @@
 .player-photo {
 	position: relative;
-	width: 100%; height: 0; /* padding-bottom: percentage(170/150); */
+	width: 100%; height: 0; padding-bottom: percentage(170/150);
 	
 	&:after {
 		@include absolute-centre; z-index: 2;
@@ -13,6 +13,14 @@
 		
 		#border {
 			fill: $default;
+
+			.is--level1 & { fill: $level1; }
+			.is--level2 & { fill: $level2; }
+			.is--level3 & { fill: $level3; }
+			.is--level4 & { fill: $level4; }
+			.is--level5 & { fill: $level5; }
+			.is--level6 & { fill: $level6; }
+			.is--level7 & { fill: $level7; }
 		}
 	}
 	
@@ -40,3 +48,86 @@
 	@include background-cover;
 	@include clip-hexagon;
 }
+
+
+/* .is--level1 {
+	
+	.player-photo {
+		svg {
+			#border {
+				fill: $level1;
+			}
+		}
+	}
+	
+}
+
+.is--level2 {
+		
+	.player-photo {
+		svg {
+			#border {
+				fill: $level2;
+			}
+		}
+	}
+	
+}
+
+.is--level3 {
+			
+	.player-photo {
+		svg {
+			#border {
+				fill: $level3;
+			}
+		}
+	}
+	
+}
+
+.is--level4 {
+	
+	.player-photo {
+		svg {
+			#border {
+				fill: $level4;
+			}
+		}
+	}
+}
+
+.is--level5 {
+
+	.player-photo {
+		svg {
+			#border {
+				fill: $level5;
+			}
+		}
+	}
+}
+
+.is--level6 {
+	
+	.player-photo {
+		svg {
+			#border {
+				fill: $level6;
+			}
+		}
+	}
+	
+}
+
+.is--level7 {
+	
+	.player-photo {
+		svg {
+			#border {
+				fill: $level7;
+			}
+		}
+	}
+	
+} */

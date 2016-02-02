@@ -5,5 +5,5 @@ html, body {
 
 body {
 	overflow-x: hidden; overflow-y: auto;
-	max-width: 480px; margin: 0 auto; padding: 50px 6px;
+	max-width: 480px; margin: 0 auto; padding-top: 100px; padding-bottom: 50px; @include gutter;
 }

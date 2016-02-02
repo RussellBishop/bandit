@@ -3,12 +3,10 @@
 @import "mixins";
 @import "colours";
 
+@import "document";
 @import "grids";
 @import "typography";
-
-@import "document";
 @import "global";
-
 @import "forms";
 
 // critical @import "modules/fullscreen";
@@ -18,11 +16,13 @@
 @import "modules/slate";
 @import "modules/player-photo";
 @import "modules/player-card";
+@import "modules/player-card";
+@import "modules/prompt";
 
-@import "views/results";
-@import "views/login";
-@import "views/match";
-
-@import "views/leaderboard";
+@import "views/results"; /* only results page */
+@import "views/login"; /* only login page */
+@import "views/match"; /* only match page */
+@import "views/leaderboard"; /* only leaderboard page */
 
 @import "fonts";
+@import "animation";
