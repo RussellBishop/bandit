@@ -69,8 +69,6 @@
 
 ?>
 
-<script src="<?=$js;?>global.min.js"></script>
-
 <?php
 
 	require($template.'endHtml.php');
