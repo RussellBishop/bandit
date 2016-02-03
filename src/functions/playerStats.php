@@ -36,7 +36,7 @@ function playerStats($id) {
 		if ($playerPosition == 1) {
 
 			return [
-			   'levelId' => 7,
+			   'levelId' => 50,
 			   'level' => 'Bandit',
 			   'rating' => $player['rating']*5
 			];
