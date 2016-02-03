@@ -1,12 +1,18 @@
 .fullscreen {
-	@include absolute-fill; position: fixed; z-index: 100;
+	visibility: hidden;
+	@include absolute-fill; position: fixed; overflow-x: hidden; overflow-y: auto; z-index: 100;
+	max-height: 100%;
 	background: rgba($shadow, 1);
+
+	&.is--toggled {
+		visibility: visible;
+	}
 
 	&.is--loading {
 
 		&.is--loaded {
 			animation: .3s ease-in fadeAway; animation-iteration-count: 1; animation-fill-mode: forwards;
-		}	
+		}
 
 	}
 }

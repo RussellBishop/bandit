@@ -11,4 +11,12 @@
 	&.is--warning {
 		background: #8C3F3C;
 	}
+
+	&.is--inline {
+		position: static;
+		padding-top: 10px; padding-bottom: 10px;
+		line-height: 1.5;
+		border-radius: 3px;
+	}
+
 }

@@ -14,6 +14,16 @@
 ?>
 
 <?php
+
+	$prompt = $_GET['prompt'];
+
+	if ($prompt == 'notfound') {
+		echo '<aside class="prompt is--prompted is--warning is--inline block">We couldn&rsquo;t find that match! It may have been cancelled.</aside>';
+	}
+
+?>
+
+<?php
 		
 	$pendingResults = $database->select('matches',
 		[
