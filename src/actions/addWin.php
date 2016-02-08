@@ -122,8 +122,39 @@
 		$loserNewRating = round($results['b']);
 		
 		$difference = $winnerNewRating - $winnerData['rating'];
+
+
+
+
+
+	// Update Winner Rating
+	$database->update('players',
+	
+		[
+			'rating' => $winnerNewRating
+		],
+		
+		[
+			'id' => $winnerId
+		]
+		
+	);
 	
 	
+	// Update Loser Rating
+	$database->update('players',
+	
+		[
+			'rating' => $loserNewRating
+		],
+		
+		[
+			'id' => $loserId
+		]
+		
+	);
+
+	// Add the match
 	$newResult = $database->insert('matches',[
 		'datetime'					=> $datetime,
 		'sent-datetime'				=> date("Y-m-d H:i:s"),
@@ -138,7 +169,9 @@
 		'difference'				=> $difference,
 		
 		'winner-new-rating'			=> $winnerNewRating,
-		'loser-new-rating'			=> $loserNewRating
+		'loser-new-rating'			=> $loserNewRating,
+
+		'accepted'					=> '1',
 	]);
 
 	if ($newResult == '0') {
@@ -157,7 +190,9 @@
 		'difference'				=> $difference,
 		
 		'winner-new-rating'			=> $winnerNewRating,
-		'loser-new-rating'			=> $loserNewRating
+		'loser-new-rating'			=> $loserNewRating,
+
+		'accepted'					=> '1',
 		);
 
 		print_r($thenewresult);
@@ -166,20 +201,20 @@
 
 	else {
 
+		$to      = 'hey@russellbishop.co.uk';
+		$subject = 'New result sent by '.$winnerData['name'];
+		$message = 'New Bandit Match: <a href="http://bandit.localhost/match.php?match='.$newResult.'"></a>';
+		$headers = 'From: noreply@russellbishop.co.uk' . "\r\n" .
+		    'Reply-To: noreply@russellbishop.co.uk' . "\r\n" .
+		    'X-Mailer: PHP/' . phpversion();
+
+		mail($to, $subject, $message, $headers);
+
 		header('Location: /match.php?match='.$newResult);
 
 	}
 
 
-	/*
-	$to      = 'hey@russellbishop.co.uk';
-	$subject = 'New result sent by '.$winnerData['name'];
-	$message = 'New Bandit Match: <a href="http://bandit.localhost/match.php?match='.$newResult.'"></a>';
-	$headers = 'From: noreply@russellbishop.co.uk' . "\r\n" .
-	    'Reply-To: noreply@russellbishop.co.uk' . "\r\n" .
-	    'X-Mailer: PHP/' . phpversion();
-
-	mail($to, $subject, $message, $headers);
-	*/
+	
 	
 ?>

@@ -1,5 +1,6 @@
 .player-card {
 	border: 2px solid $default;
+	border-radius: 3px;
 	
 	.go-to-account {
 		position: relative;
@@ -20,7 +21,6 @@
 			
 			&:after {
 				font-size: 44px;
-				//content: "Upload a photo"
 			}
 			
 			.photo-border {
@@ -213,27 +213,27 @@
 		
 	}
 
-	&.is--level7 {
-		// border-color: $level7;
+	&.is--level50 {
+		// border-color: $level50;
 		
 		.player-identity {
-			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level7,.1) 50%);
+			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level50,.1) 50%);
 		}
 		
 		.player-level {
-			background-color: $level7;
+			background-color: $level50;
 		}
 		
 		.player-photo {
 			svg {
 				#border {
-					fill: $level7;
+					fill: $level50;
 				}
 			}
 		}
 		
 		.player-stats {
-			// border-color: $level7;
+			// border-color: $level50;
 		}
 		
 	}

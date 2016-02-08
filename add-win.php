@@ -14,15 +14,13 @@
 	
 ?>
 
-<h1 class="h1">Add a Win</h1>
+<h1 class="h1">You won against</h1>
 
-<form class="block table" method="post" action="<?=$actions.'addWin.php';?>">
+<form class="block table is--result" method="post" action="<?=$actions.'addWin.php';?>">
 
 	<ol class="block table">
 
 	<li class="row">
-
-		<label for="opponent" class="h4">You played:</label>
 
 		<select name="opponent" id="opponent" required>
 			<option value="" disabled selected>Choose an opponent</option>
@@ -42,10 +40,13 @@
 
 	</li>
 
+	<li class="row">
+		<input type="number" placeholder="How many wins?" min="1" />
+	</li>
+
 	<?php $date = date('Y-m-d').'T'.date('H:i'); ?>
 
 	<li class="row">
-		<p class="h4">Date <em>(now)</em>:</p>
 		<input type="datetime-local" name="datetime" required value="<?php echo $date; ?>" />
 	</li>
 
@@ -62,8 +63,6 @@
 	require($template.'footer.php');
 
 ?>
-
-<script src="<?=$js;?>global.min.js"></script>
 
 <?php
 

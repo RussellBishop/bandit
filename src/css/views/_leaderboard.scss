@@ -211,19 +211,19 @@
 		}
 	}
 
-	&.is--level7 {
+	&.is--level50 {
 
 		#border {
-			fill: $level7;
+			fill: $level50;
 		}
 
 		.player-level {
-			color: $level7;
+			color: $level50;
 		}
 
 		&.is--you {
 			.base {
-				background-color: $level7;
+				background-color: $level50;
 			}
 		}
 	}

@@ -2,6 +2,36 @@
 
 	require_once('src/config.php');
 
+	// Let's look closer at this match...
+
+	$matchId = $_GET['match'];
+
+	if (empty($matchId)) {
+
+		header('Location: /matches.php');
+		die();
+
+	}
+
+	else {
+
+		$matchExists = $database->has("matches",
+			[
+			'id' => $matchId
+			]
+		);
+
+		if ($matchExists == 0) {
+			header('Location: /matches.php?prompt=notfound');
+			die();
+		}
+
+	}
+
+?>
+
+<?php
+
 	require_once($data.'players.php');
 	require_once($data.'ratings.php');
 	
@@ -14,12 +44,7 @@
 
 <?php
 
-	$matchId = $_GET['match'];
-
-	if (empty($matchId)) {
-		header('Location: /matches.php');
-	}
-
+	
 	$match = $database->select('matches',
 		[
 			'[><]players (sent-by)' => ['sent-by' => 'id'],
@@ -213,6 +238,24 @@
 					<?
 
 				}
+			}
+
+			else {
+
+				// I sent this pending game!
+
+				?>
+
+				<form class="actions" method="post" action="<?=$actions.'deletePendingResult.php'?>">
+						
+						<input type="hidden" name="match-id" value="<?=$match[0]['id']?>" />
+						
+						<button type="submit" class="button is--bad" name="delete">Cancel this result</button>
+												
+					</form>
+
+				<?php
+
 			}
 
 		}

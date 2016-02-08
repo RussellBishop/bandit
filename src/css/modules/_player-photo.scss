@@ -20,7 +20,7 @@
 			.is--level4 & { fill: $level4; }
 			.is--level5 & { fill: $level5; }
 			.is--level6 & { fill: $level6; }
-			.is--level7 & { fill: $level7; }
+			.is--level50 & { fill: $level50; }
 		}
 	}
 	
@@ -120,12 +120,12 @@
 	
 }
 
-.is--level7 {
+.is--level50 {
 	
 	.player-photo {
 		svg {
 			#border {
-				fill: $level7;
+				fill: $level50;
 			}
 		}
 	}
