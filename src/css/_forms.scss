@@ -1,13 +1,13 @@
 $input__size: 54px;
 
 input[type="text"], input[type="submit"], input[type="number"], input[type="password"], input[type="datetime-local"], textarea, select, button, .button {
-	display: block; width: 100%; height: $input__size;
+	display: block; width: 100%; height: $input__size; padding: 0 $gutter;
 	line-height: $input__size; font-size: 15px; color: $zircon;
-	border: none; border-bottom: 1px solid $zircon; background: transparent; 
+	border: none; border-bottom: 1px solid $zircon; background: rgba($shadow, .4);
 	border-radius: 0;
 
 	&:focus {
-		background: rgba($shadow, .2);
+		// background: rgba($shadow, .2);
 	}
 }
 
