@@ -33,9 +33,7 @@
 			
 			echo
 			
-			'">'
-			.file_get_contents('src/img/hexagon-border.svg').
-			'
+			'"><svg><use class="border" xlink:href="#hexagon" /></svg>
 				
 				<div class="photo-border">
 					<div class="colour"></div>

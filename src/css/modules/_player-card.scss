@@ -73,15 +73,7 @@
 		.player-level {
 			background-color: $level1;
 		}
-		
-		.player-photo {
-			svg {
-				#border {
-					fill: $level1;
-				}
-			}
-		}
-		
+				
 		.player-stats {
 			// border-color: $level1;
 		}
@@ -97,14 +89,6 @@
 		
 		.player-level {
 			background-color: $level2;
-		}
-		
-		.player-photo {
-			svg {
-				#border {
-					fill: $level2;
-				}
-			}
 		}
 		
 		.player-stats {
@@ -124,14 +108,6 @@
 			background-color: $level3;
 		}
 		
-		.player-photo {
-			svg {
-				#border {
-					fill: $level3;
-				}
-			}
-		}
-		
 		.player-stats {
 			// border-color: $level3;
 		}
@@ -147,14 +123,6 @@
 		
 		.player-level {
 			background-color: $level4;
-		}
-		
-		.player-photo {
-			svg {
-				#border {
-					fill: $level4;
-				}
-			}
 		}
 		
 		.player-stats {
@@ -174,14 +142,6 @@
 			background-color: $level5;
 		}
 		
-		.player-photo {
-			svg {
-				#border {
-					// fill: $level5;
-				}
-			}
-		}
-		
 		.player-stats {
 			border-color: $level5;
 		}
@@ -197,14 +157,6 @@
 		
 		.player-level {
 			background-color: $level6;
-		}
-		
-		.player-photo {
-			svg {
-				#border {
-					fill: $level6;
-				}
-			}
 		}
 		
 		.player-stats {
@@ -225,10 +177,8 @@
 		}
 		
 		.player-photo {
-			svg {
-				#border {
-					fill: $level50;
-				}
+			.border {
+				fill: $level50;
 			}
 		}
 		

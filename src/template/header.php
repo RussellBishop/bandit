@@ -18,6 +18,10 @@
 
 <body class="<?php if (!empty($view)) { echo 'view is--'.$view; } ?>">
 
+<figure style="display: none;">
+<?php echo file_get_contents('src/img/hexagon-border-symbol.svg'); ?>
+</figure>
+
 	<aside class="fullscreen is--loading">
 
 		<svg width="40px" height="46px" viewBox="0 0 40 46" version="1.1" xmlns="http://www.w3.org/2000/svg" class="spinner" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">

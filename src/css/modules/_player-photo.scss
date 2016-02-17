@@ -10,18 +10,19 @@
 	
 	svg {
 		@include absolute-fill; z-index: 1;
-		
-		#border {
-			fill: $default;
+	}
 
-			.is--level1 & { fill: $level1; }
-			.is--level2 & { fill: $level2; }
-			.is--level3 & { fill: $level3; }
-			.is--level4 & { fill: $level4; }
-			.is--level5 & { fill: $level5; }
-			.is--level6 & { fill: $level6; }
-			.is--level50 & { fill: $level50; }
-		}
+	.border {
+		fill: $default;
+		color: $charade-3;
+
+		.is--level1 & { fill: $level1; }
+		.is--level2 & { fill: $level2; }
+		.is--level3 & { fill: $level3; }
+		.is--level4 & { fill: $level4; }
+		.is--level5 & { fill: $level5; }
+		.is--level6 & { fill: $level6; }
+		.is--level50 & { fill: $level50; }
 	}
 	
 	.photo-border {
@@ -48,86 +49,3 @@
 	@include background-cover;
 	@include clip-hexagon;
 }
-
-
-/* .is--level1 {
-	
-	.player-photo {
-		svg {
-			#border {
-				fill: $level1;
-			}
-		}
-	}
-	
-}
-
-.is--level2 {
-		
-	.player-photo {
-		svg {
-			#border {
-				fill: $level2;
-			}
-		}
-	}
-	
-}
-
-.is--level3 {
-			
-	.player-photo {
-		svg {
-			#border {
-				fill: $level3;
-			}
-		}
-	}
-	
-}
-
-.is--level4 {
-	
-	.player-photo {
-		svg {
-			#border {
-				fill: $level4;
-			}
-		}
-	}
-}
-
-.is--level5 {
-
-	.player-photo {
-		svg {
-			#border {
-				fill: $level5;
-			}
-		}
-	}
-}
-
-.is--level6 {
-	
-	.player-photo {
-		svg {
-			#border {
-				fill: $level6;
-			}
-		}
-	}
-	
-}
-
-.is--level50 {
-	
-	.player-photo {
-		svg {
-			#border {
-				fill: $level50;
-			}
-		}
-	}
-	
-} */

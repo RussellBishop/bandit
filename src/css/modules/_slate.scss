@@ -117,7 +117,7 @@
 		
 		&.is--winner {
 			.player-photo {
-				#border {
+				.border {
 					fill: $win;
 				}
 			}
@@ -136,7 +136,7 @@
 					filter: grayscale(100%);
 				}
 
-				#border {
+				.border {
 					fill: $loss;
 				}
 			}
