@@ -25,6 +25,8 @@
 
 <?php
 		
+	/*
+
 	$pendingResults = $database->select('matches',
 		[
 			'[><]players (winner)' => ['winner' => 'id'],
@@ -101,6 +103,8 @@
 		echo '</section>';
 
 	}
+
+	*/
 	
 ?>
 
@@ -142,7 +146,7 @@ for ($i=0; $i < 7; $i++) {
 foreach ($matchDays as $matchDay) {
 
 	$endOfMatchDay = clone $matchDay;
-	$endOfMatchDay->modify('+1 day');
+	$endOfMatchDay->modify('+1 day -1 second');
 
 
 	// Select the matches
@@ -176,7 +180,7 @@ foreach ($matchDays as $matchDay) {
 				'accepted' => '1',
 				'matches.datetime[<>]' => [$matchDay->format("Y-m-d H:i:s"), $endOfMatchDay->format("Y-m-d H:i:s")]
 			],
-			'ORDER' => "matches.datetime DESC",
+			'ORDER' => "matches.sent-datetime DESC",
 			
 		]
 	);
@@ -241,108 +245,6 @@ foreach ($matchDays as $matchDay) {
 
 
 
-
-
-
-
-
-
-
-
-
-<?php
-
-/*
-
-<section class="block results">
-
-<h1 class="h1">Matches</h1>
-
-<ul>
-
-	<?php
-		
-		$matches = $database->select('matches',
-			[
-				'[><]players (winner)' => ['winner' => 'id'],
-				'[><]players (loser)' => ['loser' => 'id'],
-			],
-			
-			[
-				'matches.id',
-				'matches.datetime',
-				'matches.sent-by',
-				'winner.id(winner-id)',
-				'loser.id(loser-id)',
-				'winner.name(winner-name)',
-				'loser.name(loser-name)',
-				'matches.winner',
-				'matches.loser',
-				'matches.accepted',
-				'matches.declined',
-				'matches.winner-original-rating',
-				'matches.loser-original-rating',
-				'matches.difference',
-				'matches.winner-new-rating',
-				'matches.loser-new-rating'
-			],
-			
-			[
-				'accepted' => '1',
-				"ORDER" => "matches.datetime DESC",
-				"LIMIT" => 20
-			]
-		);
-		
-		foreach ($matches as $match) {
-
-			$winnerLevelId =  playerStats($match['winner-id']);
-			$loserLevelId =  playerStats($match['loser-id']);
-			
-			echo '
-				<li>
-					<a href="/match.php?match='.$match['id'].'" class="g2 slate is--result">
-					
-						<div class="base"></div>
-						
-							<div class="col1 player is--a is--winner">
-							
-								<figure class="position-triangle">'
-								.file_get_contents('src/img/position-triangle.svg').
-								'</figure>';
-								
-								playerPhoto($match['winner-id']);
-								
-								echo '
-								<div class="difference">+<span class="count">'. $match['difference']*5 .'</span></div>
-							</div>
-							
-							<div class="col2 player is--b is--loser">
-							
-								<figure class="position-triangle">'
-								.file_get_contents('src/img/position-triangle.svg').
-								'</figure>';
-								
-								playerPhoto($match['loser-id']);
-								
-								echo '
-								<div class="difference">-<span class="count">'. $match['difference']*5 .'</span></div>
-							</div>
-						
-						<p class="meta is--bottom is--when">'. timeSince(strtotime($match['datetime'])) .' ago</p>
-						
-					</a>
-				</li>';
-			
-		}
-		
-	?>
-	
-</ul>
-	
-</section>
-
-*/ ?>
 
 <?php
 
