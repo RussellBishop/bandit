@@ -83,15 +83,23 @@
 
 <?php
 
-	if ($match[0]['accepted'] == 0 && $match[0]['declined'] == 0) {
+	$dateSentPeriod = new DateTime($match[0]['sent-datetime']);
+	$dateSentPeriod->modify("+24 hours");
 
-		$matchStatus = 'pending';
+	if ($match[0]['accepted'] == 1 && $match[0]['declined'] == 0) {
 
-	}
+		if (date("Y-m-d H:i:s") > $dateSentPeriod) {
 
-	elseif ($match[0]['accepted'] == 1 && $match[0]['declined'] == 0) {
-		
-		$matchStatus = 'accepted';
+			// it's past the period to dispute
+			$matchStatus = 'accepted';
+
+
+		} else {
+
+			// it's still disputable
+			$matchStatus = 'disputable';
+
+		}
 
 	}
 
@@ -106,13 +114,11 @@
 <article class="match is--<?=$matchStatus?>">
 
 	<?php
-	if ($matchStatus == 'pending') {
-		echo '<h1 class="h1">Match pending&hellip;</h1>';
-	}
 
-	elseif ($matchStatus == 'declined') {
-		echo '<h1 class="h1">Match declined</h1>';
-	}
+		if ($matchStatus == 'declined') {
+			echo '<h1 class="h1">Match declined</h1>';
+		}
+
 	?>
 
 
@@ -125,25 +131,25 @@
 
 		?>
 
-		<div class="player is--winner is--level<?=$winnerStats['rating']?>">
+		<div class="player is--winner is--level<?=$winnerStats['levelId']?>">
 
 			<a href="player.php?player=<?=$match[0]['winner-id']?>">
 				<?php playerPhoto($match[0]['winner-id']); ?>
 				<h1 class="name"><?=$match[0]['winner-name']?></h1>
 			</a>
-			<h2 class="rating"><?=$winnerStats['rating']?></h2>
+			<h2 class="rating"><?=$match[0]['winner-original-rating']?></h2>
 
 			<div class="result">Win</div>
 		</div>
 
-		<div class="player is--loser">
+		<div class="player is--loser is--level<?=$loserStats['levelId']?>">
 
 			<a href="player.php?player=<?=$match[0]['loser-id']?>">
 				<?php playerPhoto($match[0]['loser-id']); ?>
 				<h1 class="name"><?=$match[0]['loser-name']?></h1>
 			</a>
 
-			<h2 class="rating"><?=$loserStats['rating']?></h2>
+			<h2 class="rating"><?=$match[0]['loser-original-rating']?></h2>
 
 			<div class="result">Loss</div>
 		</div>
@@ -209,7 +215,7 @@
 
 	<?php
 
-		if ($matchStatus == 'pending') {
+		if ($matchStatus == 'disputable') {
 
 			if ($match[0]['sent-by'] != $you['id']) {
 				// Not sent by me;
@@ -219,11 +225,9 @@
 
 					?>
 
-					<form class="actions" method="post" action="<?=$actions.'answerPendingResult.php'?>">
+					<form class="actions" method="post" action="<?=$actions.'disputeResult.php'?>">
 						
 						<input type="hidden" name="match-id" value="<?=$match[0]['id']?>" />
-						
-						<button type="submit" class="button" name="accepted">Accept result</button>
 						
 						<input type="checkbox" id="dispute" class="toggle is--dispute" />
 						<label for="dispute" class="button is--bad">Dispute result</label>
@@ -246,11 +250,11 @@
 
 				?>
 
-				<form class="actions" method="post" action="<?=$actions.'deletePendingResult.php'?>">
+				<form class="actions" method="post" action="<?=$actions.'cancelResult.php'?>">
 						
 						<input type="hidden" name="match-id" value="<?=$match[0]['id']?>" />
 						
-						<button type="submit" class="button is--bad" name="delete">Cancel this result</button>
+						<button type="submit" class="button is--bad" name="delete">Cancel result</button>
 												
 					</form>
 
