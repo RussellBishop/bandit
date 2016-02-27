@@ -12,8 +12,6 @@
 	require($template.'header.php');
 	require($template.'navigation.php');
 
-
-
 ?>
 
 <?php
