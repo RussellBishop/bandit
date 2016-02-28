@@ -3,10 +3,8 @@
 	require_once($_SERVER['DOCUMENT_ROOT'].'/src/config.php');
 	require_once($src.'libs/elo/rating.php');
 	require_once($functions.'functions.php');
-	
 
 	$datetime = $_POST['datetime'];
-
 
 	// winner id (you)
 	$winnerId = $you['id'];
@@ -14,207 +12,145 @@
 	// loser id (opponent)
 	$loserId = $_POST['opponent'];
 
+	// how many wins?
+	$winCount = $_POST['winCount'];
 
+	if ($winCount == 0) {
 
-	$winnerData = 
-		$database->get("players",
-		
-			[
-				'id', 'name', 'rating', 'email'
-			],
-		
-			[
-				'id' => $winnerId
-			]
-		
-		);
-		
-	$loserData = 
-		$database->get("players",
-		
-			[
-				'id', 'rating', 'rating', 'email'
-			],
-		
-			[
-				'id' => $loserId
-			]
-		
-		);
-
-
-
-	/*
-		LOSERS RATING ($losersRating)
-	*/
-
-	// get games before today
-	$losersPreviousGamesCount = gamesBeforeToday($loserId);
-
-	// if no games before today,  get rating from the players table
-	if ($losersPreviousGamesCount == '0') {
-
-		$losersRating = $loserData['rating'];
+		echo 'We cant add 0 wins.';
+		die;
 
 	}
 
-	// if they have previous games, get the last game and find their id
-	else {
+	elseif ($winCount > 20) {
 
-		$losersLastGame = selectLastGameBeforeToday($loserId);
+		echo 'Too many games at once.';
+		die;
 
-		if ($losersLastGame['winner'] == $loserId) {
+	}
 
-			$losersRating = $losersLastGame['winner-original-rating'];
 
-		} elseif ($losersLastGame['loser'] == $loserId) {
+	// get players' last ratings
+	$winnerRatingToCalculate = playersRatingToCalculate($winnerId);
+	$loserRatingToCalculate = playersRatingToCalculate($loserId);
+
+
+	// calculate the difference
+	$rating = new Rating($winnerRatingToCalculate, $loserRatingToCalculate, 1, 0);
 			
-			$losersRating = $losersLastGame['loser-original-rating'];
-
-		}
-
-	}
-
-
-
-
-
-	/*
-		WINNERS RATING ($winnersRating)
-	*/
-
-	// get games before today
-	$winnersPreviousGamesCount = gamesBeforeToday($winnerId);
-
-	// if no games before today,  get rating from the players table
-	if ($winnersPreviousGamesCount == '0') {
-
-		$winnersRating = $winnerData['rating'];
-
-	}
-
-	// if they have previous games, get the last game and find their id
-	else {
-
-		$winnersLastGame = selectLastGameBeforeToday($winnerId);
-
-		if ($winnersLastGame['winner'] == $winnerId) {
-
-			$winnersRating = $winnersLastGame['winner-original-rating'];
-
-		} elseif ($winnersLastGame['loser'] == $winnerId) {
-			
-			$winnersRating = $winnersLastGame['loser-original-rating'];
-
-		}
-
-	}
-
-
-	
-	
-	
-	$rating = new Rating($winnersRating, $losersRating, 1, 0);
-		
 		$results = $rating->getNewRatings();
 		
 		$winnerNewRating = round($results['a']);
-		$loserNewRating = round($results['b']);
 		
-		$difference = $winnerNewRating - $winnerData['rating'];
+		$difference = $winnerNewRating - $winnerRatingToCalculate;
 
 
 
 
-
-	// Update Winner Rating
-	$database->update('players',
 	
-		[
-			'rating' => $winnerNewRating
-		],
+
+
+
+	// for every win against this player...
+	for ($i = 0; $i < $winCount; $i++) {
+
+
+		// get their live rating
+		$winnerData =
+
+			$database->get("players",
+			
+				[
+					'rating'
+				],
+			
+				[
+					'id' => $winnerId
+				]
+			
+			);
+			
+		$loserData = 
+			$database->get("players",
+			
+				[
+					'rating'
+				],
+			
+				[
+					'id' => $loserId
+				]
+			
+			);
+
+		$winnerNewLiveRating = $winnerData['rating'] + $difference;
+		$loserNewLiveRating = $loserData['rating'] - $difference;
+
+
+
+		// Add the match
+		$newResult = $database->insert('matches',[
+
+			'datetime'					=> date("Y-m-d 00:00:00"),
+			'sent-datetime'				=> date("Y-m-d H:i:s",strtotime('+'.$i.' seconds')),
+			'sent-by'					=> $you['id'],
+
+			'winner'					=> $winnerId,
+			'loser'						=> $loserId,
+
+			'winner-original-rating'	=> $winnerData['rating'],
+			'loser-original-rating'		=> $loserData['rating'],
+
+			'difference'				=> $difference,
+			
+			'winner-new-rating'			=> $winnerNewLiveRating,
+			'loser-new-rating'			=> $loserNewLiveRating,
+
+			'accepted'					=> '1',
+
+		]);
+
+
+
+		// Update Winner Rating
+		$database->update('players',
 		
-		[
-			'id' => $winnerId
-		]
+			[
+				'rating[+]' => $difference
+			],
+			
+			[
+				'id' => $winnerId
+			]
+			
+		);
 		
-	);
-	
-	
-	// Update Loser Rating
-	$database->update('players',
-	
-		[
-			'rating' => $loserNewRating
-		],
 		
-		[
-			'id' => $loserId
-		]
+		// Update Loser Rating
+		$database->update('players',
 		
-	);
-
-	// Add the match
-	$newResult = $database->insert('matches',[
-		'datetime'					=> $datetime,
-		'sent-datetime'				=> date("Y-m-d H:i:s"),
-		'sent-by'					=> $you['id'],
-
-		'winner'					=> $winnerId,
-		'loser'						=> $loserId,
-
-		'winner-original-rating'	=> $winnersRating,
-		'loser-original-rating'		=> $losersRating,
-
-		'difference'				=> $difference,
-		
-		'winner-new-rating'			=> $winnerNewRating,
-		'loser-new-rating'			=> $loserNewRating,
-
-		'accepted'					=> '1',
-	]);
-
-	if ($newResult == '0') {
-
-		$thenewresult = array (
-		'datetime'					=> $datetime,
-		'sent-datetime'				=> date("Y-m-d H:i:s"),
-		'sent-by'					=> $you['id'],
-
-		'winner'					=> $winnerId,
-		'loser'						=> $loserId,
-
-		'winner-original-rating'	=> $winnersRating,
-		'loser-original-rating'		=> $losersRating,
-
-		'difference'				=> $difference,
-		
-		'winner-new-rating'			=> $winnerNewRating,
-		'loser-new-rating'			=> $loserNewRating,
-
-		'accepted'					=> '1',
+			[
+				'rating[-]' => $difference
+			],
+			
+			[
+				'id' => $loserId
+			]
+			
 		);
 
-		print_r($thenewresult);
-
-	} 
-
-	else {
-
 		$to      = 'hey@russellbishop.co.uk';
-		$subject = 'New result sent by '.$winnerData['name'];
-		$message = 'New Bandit Match: <a href="http://bandit.localhost/match.php?match='.$newResult.'"></a>';
+		$subject = 'New result sent by '.$you['id'];
+		$message = 'New Bandit Match: <a href="'.$_SERVER['DOCUMENT_ROOT'].'/match.php?match='.$newResult.'"></a>';
 		$headers = 'From: noreply@russellbishop.co.uk' . "\r\n" .
 		    'Reply-To: noreply@russellbishop.co.uk' . "\r\n" .
 		    'X-Mailer: PHP/' . phpversion();
 
 		mail($to, $subject, $message, $headers);
 
-		header('Location: /match.php?match='.$newResult);
-
 	}
 
-
-	
+	// All done? Go to matches.php
+	header('Location: /matches.php');
 	
 ?>

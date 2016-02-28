@@ -14,45 +14,47 @@
 	
 ?>
 
-<h1 class="h1">You won against</h1>
+<h1 class="h1">You won against&hellip;</h1>
 
 <form class="block table is--result" method="post" action="<?=$actions.'addWin.php';?>">
 
 	<ol class="block table">
 
-	<li class="row">
+		<li class="row">
 
-		<select name="opponent" id="opponent" required>
-			<option value="" disabled selected>Choose an opponent</option>
-			<?php
-		
-				foreach ($players as $player) {
-					
-					if ($player['id'] != $you['id'])
-					{
-						echo '<option value="' . $player['id'] . '">' . $player['name'] . '</option>';
+			<select name="opponent" id="opponent" required>
+				<option value="" disabled selected>Choose today's opponent</option>
+				<?php
+			
+					foreach ($players as $player) {
+						
+						if ($player['id'] != $you['id'])
+						{
+							echo '<option value="' . $player['id'] . '">' . $player['name'] . '</option>';
+						}
+						
 					}
-					
-				}
-		
-			?>
-		</select>
+			
+				?>
+			</select>
 
-	</li>
+		</li>
 
-	<li class="row">
-		<input type="number" placeholder="How many wins?" min="1" />
-	</li>
+		<li class="row">
 
-	<?php $date = date('Y-m-d').'T'.date('H:i'); ?>
+			<div class="stepper g1">
+			    <div><button type="button" class="button is--disabled is--decrease" data-decrease>-</button></div>
+			    <div><input type="text" value="1" min="1" max="20" name="winCount" id="winCount" /></div>
+			    <div><button type="button" class="button is--good is--increase" data-increase>+</button></div>
+			</div>
 
-	<li class="row">
-		<input type="datetime-local" name="datetime" required value="<?php echo $date; ?>" />
-	</li>
+		</li>
 
-	<li class="row">
-		<button type="submit" name="submit">Win</button>
-	</li>
+		<p class="prompt is--inline is--prompted is--warning is--faded">Make sure this information is correct, or risk penalties!</p>
+
+		<li>
+			<button type="submit" class="button is--good" name="submit">Add My Wins</button>
+		</li>
 
 	</ol>
 
@@ -63,6 +65,17 @@
 	require($template.'footer.php');
 
 ?>
+
+<script>
+
+	$('.stepper').inputStepper({
+	    selectorButtonIncrease: '.is--increase',
+	    selectorButtonDecrease: '.is--decrease',
+	    dataAttributeIncrease: 'increase',
+	    dataAttributeDecrease: 'decrease'
+	});
+
+</script>
 
 <?php
 
