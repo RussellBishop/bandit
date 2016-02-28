@@ -15,17 +15,6 @@
 
 <?php
 
-	$prompt = $_GET['prompt'];
-
-	if ($prompt == 'notfound') {
-		echo '<aside class="prompt is--prompted is--warning is--inline block">We couldn&rsquo;t find that match! It may have been cancelled.</aside>';
-	}
-
-?>
-
-
-<?php
-
 
 
 
@@ -102,16 +91,24 @@ foreach ($matchDays as $matchDay) {
 
 		foreach ($matches as $match) {
 
-			$winnerLevelId =  playerStats($match['winner-id']);
-			$loserLevelId =  playerStats($match['loser-id']);
+			$winnerStats =  playerStats($match['winner-id']);
+			$loserStats =  playerStats($match['loser-id']);
+
+			if ($match['declined'] == 1) {
+				$isDisputed = ' is--disputed';
+			}
+
+			else {
+				$isDisputed = '';
+			}
 			
 			echo '
 				<li>
-					<a href="/match.php?match='.$match['id'].'" class="g2 slate is--result">
+					<a href="/match.php?match='.$match['id'].'" class="g2 slate is--result'.$isDisputed.'">
 					
 						<div class="base"></div>
 						
-						<div class="col1 player is--a is--winner">
+						<div class="col1 player is--a is--winner is--level'.$winnerStats['levelId'].'">
 						
 							<figure class="position-triangle">'
 							.file_get_contents('src/img/position-triangle.svg').
@@ -123,7 +120,7 @@ foreach ($matchDays as $matchDay) {
 							<div class="difference">+<span class="count">'. $match['difference']*5 .'</span></div>
 						</div>
 						
-						<div class="col2 player is--b is--loser">
+						<div class="col2 player is--b is--loser is--level'.$loserStats['levelId'].'">
 						
 							<figure class="position-triangle">'
 							.file_get_contents('src/img/position-triangle.svg').
