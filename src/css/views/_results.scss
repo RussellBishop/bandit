@@ -1,7 +1,7 @@
 .results {
 	
 	.h1 {
-		@include jump-responsive(margin-bottom, .5);
+		// @include jump-responsive(margin-bottom, .5);
 	}
 	
 	li:not(:last-child) {
