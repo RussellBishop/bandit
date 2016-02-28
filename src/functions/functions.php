@@ -10,7 +10,10 @@
 	require_once($functions.'playerPhotoInline.php');
 	require_once($functions.'acronym.php');
 	
-	require_once($functions.'gamesBeforeToday.php');
+	require_once($functions.'countPlayersGames.php');
 	require_once($functions.'selectLastGameBeforeToday.php');
-	
+	require_once($functions.'selectFirstGameToday.php');
+
+	require_once($functions.'playersRatingToCalculate.php');
+
 ?>
