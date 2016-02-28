@@ -10,6 +10,11 @@
 
 	&.is--warning {
 		background: #8C3F3C;
+
+		&.is--faded {
+			color: #999;
+			background: rgba(#8C3F3C, .2);
+		}
 	}
 
 	&.is--inline {
