@@ -83,8 +83,8 @@
 
 <?php
 
-	$dateSentPeriod = new DateTime($match[0]['sent-datetime']);
-	$dateSentPeriod->modify("+24 hours");
+	// 1 day after it was sent
+	$dateSentPeriod = date('Y-m-d H:i:s', strtotime($match[0]['sent-datetime'] . '+1 day'));
 
 	if ($match[0]['accepted'] == 1 && $match[0]['declined'] == 0) {
 
@@ -103,7 +103,7 @@
 
 	}
 
-	elseif ($match[0]['declined'] == 1 && $match[0]['accepted'] == 0) {
+	elseif ($match[0]['declined'] == 1) {
 
 		$matchStatus = 'declined';
 
@@ -114,6 +114,7 @@
 <article class="match is--<?=$matchStatus?>">
 
 	<?php
+
 
 		if ($matchStatus == 'declined') {
 			echo '<h1 class="h1">Match declined</h1>';
@@ -139,7 +140,7 @@
 			</a>
 			<h2 class="rating"><?=$match[0]['winner-original-rating']?></h2>
 
-			<div class="result">Win</div>
+			<div class="result">+<?=$match[0]['difference']*5?></div>
 		</div>
 
 		<div class="player is--loser is--level<?=$loserStats['levelId']?>">
@@ -151,7 +152,7 @@
 
 			<h2 class="rating"><?=$match[0]['loser-original-rating']?></h2>
 
-			<div class="result">Loss</div>
+			<div class="result">-<?=$match[0]['difference']*5?></div>
 		</div>
 
 	</section>
@@ -167,7 +168,7 @@
 
 		?> 
 		</p>
-		<p><?php playerPhotoInline($match[0]['sent-by']); ?> <?=$match[0]['sent-by-name']?></p>
+		<?php /* <p> playerPhotoInline($match[0]['sent-by']); ?> <?=$match[0]['sent-by-name']?></p> */ ?>
 
 	</li>
 
@@ -180,16 +181,6 @@
 
 		?> 
 		</p>
-		<p>
-		<?php
-
-			$matchDatetime = DateTime::createFromFormat('Y-m-d H:i:s', $match[0]['datetime']);
-			$matchWorded = $matchDatetime->format('l g:iA, F dS Y');
-
-			echo $matchWorded;
-
-		?>
-		</p>
 	</li>
 
 	<?php
@@ -199,11 +190,16 @@
 			?>
 
 			<li class="row is--disputed">
-			<h3 class="h4">Disputed:</h4>
-			<p class="quote">
-				<?=$match[0]['dispute-message'];?>
-			</p>
-		</li>
+
+				<h3 class="h4">Disputed by <?=$match[0]['loser-name']?>.</h4>
+
+				<?php if (!empty($match[0]['dispute-message'])) { ?>
+					<p class="quote">
+						<?=$match[0]['dispute-message'];?>
+					</p>
+				<?php } ?>
+
+			</li>
 
 			<?
 
@@ -212,6 +208,28 @@
 	?>
 
 	</ol>
+
+	<?php
+
+		if ($match[0]['sent-by'] == $you['id'] && $matchStatus == 'declined') {
+
+	?>
+
+		<form class="actions" method="post" action="<?=$actions.'cancelResult.php'?>">
+						
+			<input type="hidden" name="match-id" value="<?=$match[0]['id']?>" />
+			
+			<button type="submit" class="button is--bad" name="delete">Cancel result</button>
+									
+		</form>
+
+	<?php
+
+		}
+
+	?>
+
+
 
 	<?php
 
