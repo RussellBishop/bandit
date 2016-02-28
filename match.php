@@ -138,7 +138,7 @@
 				<?php playerPhoto($match[0]['winner-id']); ?>
 				<h1 class="name"><?=$match[0]['winner-name']?></h1>
 			</a>
-			<h2 class="rating"><?=$match[0]['winner-original-rating']?></h2>
+			<h2 class="rating"><?=$match[0]['winner-original-rating']*5?></h2>
 
 			<div class="result">+<?=$match[0]['difference']*5?></div>
 		</div>
@@ -150,7 +150,7 @@
 				<h1 class="name"><?=$match[0]['loser-name']?></h1>
 			</a>
 
-			<h2 class="rating"><?=$match[0]['loser-original-rating']?></h2>
+			<h2 class="rating"><?=$match[0]['loser-original-rating']*5?></h2>
 
 			<div class="result">-<?=$match[0]['difference']*5?></div>
 		</div>
