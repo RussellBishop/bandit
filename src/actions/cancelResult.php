@@ -11,7 +11,7 @@
 	
 	// Get the match info
 	$matchData = $database->get('matches',
-		
+	
 		[
 			'id',
 			'sent-datetime',
