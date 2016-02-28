@@ -64,6 +64,20 @@
 		include($template.'playerStatsExtra.php');
 	}
 
+
+
+		else {
+
+			$countPlayersGames = countPlayersGames($player['id']);
+
+			$gamesRemaining = 10 - $countPlayersGames;
+
+			echo '<h3 class="h3 block is--textcentre prompt is--inline is--prompted">'.$gamesRemaining.' games left to play!</h1>';
+
+		}
+
+
+
 ?>
 
 <section class="block results">
@@ -112,80 +126,49 @@
 		
 		foreach ($mostRecentResults as $result) {
 			
-			if ($result['accepted'] == 0) {
-				
-				echo '
-				
-				<li>
-					<a href="/match.php?match='.$result['id'].'" class="g2 slate is--result is--pending">
-						
-						<div class="base"></div>
-						
-							<div class="col1 player is--a">
-								';
-								
-								playerPhoto($result['winner-id']);
-								
-								echo '
-								<div class="difference">Win</div>
-							</div>
-							
-							<div class="col2 player is--b">
-								';
-								
-								playerPhoto($result['loser-id']);
-								
-								echo '
-								<div class="difference">Loss</div>
-							</div>
-							
-						<p class="meta is--bottom is--pending">Pending</p>
-						
-					</a>
-				</li>
-				
-				';
-				
+			$winnerStats =  playerStats($result['winner-id']);
+			$loserStats =  playerStats($result['loser-id']);
+
+			if ($result['declined'] == 1) {
+				$isDisputed = ' is--disputed';
+			}
+
+			else {
+				$isDisputed = '';
 			}
 			
-			else {
-				
-				echo '
+			echo '
 				<li>
-					<a href="/match.php?match='.$result['id'].'" class="g2 slate is--result">
+					<a href="/match.php?match='.$result['id'].'" class="g2 slate is--result'.$isDisputed.'">
 					
 						<div class="base"></div>
 						
-							<div class="col1 player is--a is--winner">
-							
-								<figure class="position-triangle">'
-								.file_get_contents('src/img/position-triangle.svg').
-								'</figure>';
-								
-								playerPhoto($result['winner-id']);
-								
-								echo '
-								<div class="difference">+<span class="count">'. $result['difference']*5 .'</span></div>
-							</div>
-							
-							<div class="col2 player is--b is--loser">
-							
-								<figure class="position-triangle">'
-								.file_get_contents('src/img/position-triangle.svg').
-								'</figure>';
-								
-								playerPhoto($result['loser-id']);
-								
-								echo '
-								<div class="difference">-<span class="count">'. $result['difference']*5 .'</span></div>
-							</div>
+						<div class="col1 player is--a is--winner is--level'.$winnerStats['levelId'].'">
 						
-						<p class="meta is--bottom is--when">'. timeSince(strtotime($result['datetime'])) .' ago</p>
+							<figure class="position-triangle">'
+							.file_get_contents('src/img/position-triangle.svg').
+							'</figure>';
+							
+							playerPhoto($result['winner-id']);
+							
+							echo '
+							<div class="difference">+<span class="count">'. $result['difference']*5 .'</span></div>
+						</div>
 						
+						<div class="col2 player is--b is--loser is--level'.$loserStats['levelId'].'">
+						
+							<figure class="position-triangle">'
+							.file_get_contents('src/img/position-triangle.svg').
+							'</figure>';
+							
+							playerPhoto($result['loser-id']);
+							
+							echo '
+							<div class="difference">-<span class="count">'. $result['difference']*5 .'</span></div>
+						</div>			
+
 					</a>
 				</li>';
-				
-			}
 		
 		}
 		
