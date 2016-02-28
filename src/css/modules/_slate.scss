@@ -57,6 +57,12 @@
 		}
 		*/
 	}
+
+	&.is--disputed {
+		.base {
+			background-color: $loss-dark;
+		}
+	}
 }
 
 .slate.is--result {
@@ -116,11 +122,13 @@
 		}
 		
 		&.is--winner {
+			/*
 			.player-photo {
 				.border {
 					fill: $win;
 				}
 			}
+			*/
 			
 			.position-triangle {
 				#triangleUp {
@@ -136,9 +144,11 @@
 					filter: grayscale(100%);
 				}
 
+				/*
 				.border {
 					fill: $loss;
 				}
+				*/
 			}
 			
 			.position-triangle {
