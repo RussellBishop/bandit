@@ -15,12 +15,6 @@
 ?>
 
 <?php
-
-	echo '<a href="/add-win.php" class="block button is--good">Add Wins</a>';
-
-?>
-
-<?php
 	
 	$playerId = $you['id'];
 
