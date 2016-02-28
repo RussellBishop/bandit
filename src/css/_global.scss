@@ -17,7 +17,12 @@
 		}
 
 		&.is--disputed {
+			padding: $jump $gutter;
 			background-color: $loss-dark;
+
+			.quote {
+				margin-top: $jump;
+			}
 		}
 	}
 }
@@ -46,4 +51,8 @@
 	padding: 6px;
 	background-color: rgba($shadow, .4);
 	border-radius: 3px;
+}
+
+.is--textcentre {
+	text-align: center;
 }
