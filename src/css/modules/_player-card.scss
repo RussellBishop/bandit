@@ -40,12 +40,15 @@
 			background: $default;
 			box-shadow: 0px 1px 1px 0px $shadow, 0px 2px 5px 0px rgba($steel-gray,0.28); border-radius: 6px; transform: translate(-50%, 0);
 		}
+
+		&-stats, &-levelUp {
+			padding-top: 15px; padding-bottom: 15px;
+			background-color: $charade-2; border-top: 2px solid $default;
+			color: $cadet-blue;
+		}
 		
 		&-stats {
-			padding: 15px 0;
-			background-color: $charade-2; border-top: 2px solid $default;
-			text-align: center; line-height: 1; color: $cadet-blue;
-			border-radius: 0 0 6px 6px;
+			text-align: center; line-height: 1; 
 
 			a {
 				color: inherit;
@@ -59,6 +62,65 @@
 				font-size: 22px; line-height: 1; color: $zircon;
 			}
 	
+		}
+
+		&-levelUp {
+			position: relative;
+			padding-left: 15px; padding-right: 15px;
+
+			.progress {
+				position: absolute; top: 0; left: 0; bottom: 0; opacity: .2; z-index: 1;
+			}
+
+			&.is--level1 {
+				.level-name {
+					color: $level1;
+				}
+
+				.progress {
+					background-color: $level1;
+				}
+			}
+
+			&.is--level2 {
+				.level-name {
+					color: $level2;
+				}
+
+				.progress {
+					background-color: $level2;
+				}
+			}
+
+			&.is--level3 {
+				.level-name {
+					color: $level3;
+				}
+
+				.progress {
+					background-color: $level3;
+				}
+			}
+
+			&.is--level4 {
+				.level-name {
+					color: $level4;
+				}
+
+				.progress {
+					background-color: $level4;
+				}
+			}
+
+			&.is--level5 {
+				.level-name {
+					color: $level5;
+				}
+
+				.progress {
+					background-color: $level5;
+				}
+			}
 		}
 		
 	}

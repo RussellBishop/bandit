@@ -94,6 +94,15 @@ class Rating
         );
     }
 
+
+    public function getExpectedScores()
+    {
+        return array (
+            'a' => $this -> _expectedA,
+            'b' => $this -> _expectedB
+        );
+    }
+
     /**
      * Protected & private functions begin here
      */

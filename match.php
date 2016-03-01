@@ -168,7 +168,6 @@
 
 		?> 
 		</p>
-		<?php /* <p> playerPhotoInline($match[0]['sent-by']); ?> <?=$match[0]['sent-by-name']?></p> */ ?>
 
 	</li>
 

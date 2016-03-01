@@ -6,6 +6,7 @@
 	require_once($data.'players.php');
 	require_once($data.'ratings.php');
 
+	require_once($src.'libs/elo/rating.php');
 	require_once($functions.'functions.php');
 	
 	require($template.'header.php');
@@ -70,7 +71,7 @@ foreach ($matchDays as $matchDay) {
 			'matches.loser-original-rating',
 			'matches.difference',
 			'matches.winner-new-rating',
-			'matches.loser-new-rating'
+			'matches.loser-new-rating',
 		],
 		
 		[
@@ -89,6 +90,7 @@ foreach ($matchDays as $matchDay) {
 		<section class="block results">
 		<h1 class="h1">'.$matchDay->format('l jS').'</h1>';
 
+		// each match
 		foreach ($matches as $match) {
 
 			$winnerStats =  playerStats($match['winner-id']);
@@ -107,7 +109,7 @@ foreach ($matchDays as $matchDay) {
 					<a href="/match.php?match='.$match['id'].'" class="g2 slate is--result'.$isDisputed.'">
 					
 						<div class="base"></div>
-						
+
 						<div class="col1 player is--a is--winner is--level'.$winnerStats['levelId'].'">
 						
 							<figure class="position-triangle">'

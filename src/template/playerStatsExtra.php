@@ -104,7 +104,7 @@
 					echo '<a href="/match.php?match=' .$bestWin[0]['id']. '">';
 					echo 'Versus. ';
 					playerPhotoInline($bestWin[0]['loser-id']);
-					echo ' ' .$bestWin[0]['loser-name']. ' ('.$bestLoserStats['rating'].')</a>';
+					echo ' ' .$bestWin[0]['loser-name']. ' ('.($bestWin[0]['loser-original-rating']*5).')</a>';
 					
 				?>
 			</p>

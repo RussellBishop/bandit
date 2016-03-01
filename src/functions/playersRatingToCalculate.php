@@ -55,17 +55,16 @@
 				// was the winner
 				if ($lastGameBeforeToday['winner'] == $id) {
 
-					return $lastGameBeforeToday['winner-original-rating'];
+					return $lastGameBeforeToday['winner-new-rating'];
 
 				}
 
 				// was the loser
 				elseif ($lastGameBeforeToday['loser'] == $id) {
 					
-					return $lastGameBeforeToday['loser-original-rating'];
+					return $lastGameBeforeToday['loser-new-rating'];
 
 				}
-
 			}
 		}
 	}

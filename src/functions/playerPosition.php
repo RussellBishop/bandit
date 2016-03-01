@@ -20,7 +20,7 @@ function playerPosition($id) {
 
 	foreach ($players as $player) {
 
-		$matchesPlayed = matchesPlayed($player['id']);
+		$matchesPlayed = countPlayersGames($player['id']);
 
 		if ($matchesPlayed > 9 ) {
 

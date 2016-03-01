@@ -1,15 +1,13 @@
 <?php
 
-	function selectLastGameBeforeToday($id) {
+	function selectLastGame($id) {
 
 		global $database;
 
-		$lastGameArray = $database->select('matches',
-
+		$lastGame = $database->select('matches',
 			[
 				'id',
 				'datetime',
-				'sent-datetime',
 				'winner',
 				'loser',
 				'winner-original-rating',
@@ -17,28 +15,23 @@
 				'winner-new-rating',
 				'loser-new-rating',
 			],
-
+			
 			[
 				'AND' => [
-					'accepted' => 1,
-					'declined' => 0,
-					"datetime[<]" => date("Y-m-d 00:00:00"),
-
 					'OR' => [
 						'winner' => $id,
 						'loser' => $id
 					],
+					'accepted' => '1',
+					'declined' => '0',
 				],
 				
 				"ORDER" => "sent-datetime DESC",
-				"LIMIT" => 3
+				"LIMIT" => 1
 			]
-			
 		);
 
-		$lastGame = $lastGameArray[0];
-
-		return $lastGame;
+		return $lastGame[0];
 
 	}
 

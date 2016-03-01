@@ -46,6 +46,11 @@
 
 
 
+		$expectedScore = $rating->getExpectedScores();
+		$odds = $expectedScore['a'];
+
+
+
 
 	
 
@@ -61,7 +66,7 @@
 			$database->get("players",
 			
 				[
-					'rating'
+					'rating', 'name'
 				],
 			
 				[
@@ -74,7 +79,7 @@
 			$database->get("players",
 			
 				[
-					'rating'
+					'rating', 'email', 'name'
 				],
 			
 				[
@@ -106,7 +111,7 @@
 			'winner-new-rating'			=> $winnerNewLiveRating,
 			'loser-new-rating'			=> $loserNewLiveRating,
 
-			'accepted'					=> '1',
+			'accepted'					=> '1'
 
 		]);
 

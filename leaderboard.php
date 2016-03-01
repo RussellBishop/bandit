@@ -34,35 +34,19 @@
 	
 	foreach ($leaderboardPlayers as $player) {
 
-		$matchesPlayed = matchesPlayed($player['id']);
+		$matchesPlayed = countPlayersGames($player['id']);
 
+		// they've played 10 matches
 		if ($matchesPlayed > 9) {
 
 			$playerStats = playerStats($player['id']);
 
-			$lastGame = $database->select('matches',
-				[
-					'datetime', 'winner', 'loser'
-				],
-				
-				[
-					'AND' => [
-						'OR' => [
-							'winner' => $player['id'],
-							'loser' => $player['id']
-						],
-						'accepted' => '1',
-					],
-					
-					"ORDER" => "datetime DESC",
-					"LIMIT" => 1
-				]
-			);
+			$lastGame = selectLastGame($player['id']);
 
-			if ($lastGame[0]['winner'] == $player['id']) {
+			if ($lastGame['winner'] == $player['id']) {
 				$lastGameResult = 'is--winner';
 			}
-			elseif ($lastGame[0]['loser'] == $player['id']) {
+			elseif ($lastGame['loser'] == $player['id']) {
 				$lastGameResult = 'is--loser';
 			}
 
@@ -121,45 +105,19 @@
 		
 	foreach ($leaderboardPlayers as $player) {
 
-		$matchesPlayed = $database->count('matches',
-			[
-				'AND' => [
-					'OR' => [
-						'winner' => $player['id'],
-						'loser' => $player['id']
-					],
-					'accepted' => '1',
-				],
-			]
-		);
+		$matchesPlayed = countPlayersGames($player['id']);
 
+		// haven't played 10 matches
 		if ($matchesPlayed < 10) {
 
 			$playerStats = playerStats($player['id']);
 
-			$lastGame = $database->select('matches',
-				[
-					'datetime', 'winner', 'loser'
-				],
-				
-				[
-					'AND' => [
-						'OR' => [
-							'winner' => $player['id'],
-							'loser' => $player['id']
-						],
-						'accepted' => '1',
-					],
-					
-					"ORDER" => "datetime DESC",
-					"LIMIT" => 1
-				]
-			);
+			$lastGame = selectLastGame($player['id']);
 
-			if ($lastGame[0]['winner'] == $player['id']) {
+			if ($lastGame['winner'] == $player['id']) {
 				$lastGameResult = 'is--winner';
 			}
-			elseif ($lastGame[0]['loser'] == $player['id']) {
+			elseif ($lastGame['loser'] == $player['id']) {
 				$lastGameResult = 'is--loser';
 			}
 

@@ -14,7 +14,7 @@
 
 	$playerStats = playerStats($player['id']);
 
-	$matchesPlayed = matchesPlayed($player['id']);
+	$matchesPlayed = countPlayersGames($player['id']);
 
 ?>
 
@@ -119,7 +119,7 @@
 					],
 				],
 				
-				"ORDER" => "matches.datetime DESC",
+				'ORDER' => "matches.sent-datetime DESC",
 				"LIMIT" => 5
 			]
 		);

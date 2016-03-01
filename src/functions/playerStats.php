@@ -4,7 +4,7 @@ function playerStats($id) {
 
 	global $database;
 
-	$matchesPlayed = matchesPlayed($id);
+	$matchesPlayed = countPlayersGames($id);
 
 	// played less than 10 games?
 	if ($matchesPlayed < 10) {
@@ -76,7 +76,7 @@ function playerStats($id) {
 				
 			}
 			
-			else if ((1100 <= $player['rating']) && ($player['rating'] <= 1199)) {
+			else if ((1200 <= $player['rating']) && ($player['rating'] <= 1299)) {
 				
 				return [
 				   'levelId' => 4,
@@ -86,7 +86,7 @@ function playerStats($id) {
 				
 			}
 			
-			else if ((1200 <= $player['rating']) && ($player['rating'] <= 1299)) {
+			else if ((1300 <= $player['rating']) && ($player['rating'] <= 1399)) {
 				
 				return [
 				   'levelId' => 5,
@@ -96,7 +96,7 @@ function playerStats($id) {
 				
 			}
 
-			else if ((1300 <= $player['rating']) && ($player['rating'] <= 1399)) {
+			else if ((1400 <= $player['rating']) && ($player['rating'] <= 1499)) {
 				
 				return [
 				   'levelId' => 6,
@@ -106,7 +106,7 @@ function playerStats($id) {
 				
 			}
 
-			else if ((1400 <= $player['rating']) && ($player['rating'] <= 1499)) {
+			else if ((1500 <= $player['rating']) && ($player['rating'] <= 1599)) {
 				
 				return [
 				   'levelId' => 7,
@@ -116,7 +116,7 @@ function playerStats($id) {
 				
 			}
 
-			else if ((1500 <= $player['rating']) && ($player['rating'] <= 1599)) {
+			else if ((1600 <= $player['rating']) && ($player['rating'] <= 1699)) {
 				
 				return [
 				   'levelId' => 8,
@@ -126,7 +126,7 @@ function playerStats($id) {
 				
 			}
 
-			else if ((1600 <= $player['rating']) && ($player['rating'] <= 1699)) {
+			else if ((1700 <= $player['rating']) && ($player['rating'] <= 1799)) {
 				
 				return [
 				   'levelId' => 9,
@@ -136,7 +136,7 @@ function playerStats($id) {
 				
 			}
 
-			else if ((1700 <= $player['rating']) && ($player['rating'] <= 1799)) {
+			else if ((1800 <= $player['rating']) && ($player['rating'] <= 1899)) {
 				
 				return [
 				   'levelId' => 10,
@@ -146,7 +146,7 @@ function playerStats($id) {
 				
 			}
 
-			else if ((1800 <= $player['rating']) && ($player['rating'] <= 1899)) {
+			else if ((1900 <= $player['rating']) && ($player['rating'] <= 1999)) {
 				
 				return [
 				   'levelId' => 11,
@@ -156,7 +156,7 @@ function playerStats($id) {
 				
 			}
 
-			else if ((1900 <= $player['rating']) && ($player['rating'] <= 1999)) {
+			else if ((2000 <= $player['rating']) && ($player['rating'] <= 2099)) {
 				
 				return [
 				   'levelId' => 12,
@@ -166,7 +166,7 @@ function playerStats($id) {
 				
 			}
 
-			else if ((2000 <= $player['rating']) && ($player['rating'] <= 2099)) {
+			else if ((2100 <= $player['rating']) && ($player['rating'] <= 2199)) {
 				
 				return [
 				   'levelId' => 13,
@@ -176,7 +176,7 @@ function playerStats($id) {
 				
 			}
 
-			else if ((2100 <= $player['rating'])) {
+			else if ((2200 <= $player['rating'])) {
 				
 				return [
 				   'levelId' => 14,
