@@ -21,8 +21,12 @@
 		]
 		
 	);
+
+	$oneMonthAgo = date("Y-m-d 00:00:00", strtotime('-1 month'));
 	
 ?>
+
+
 
 <article class="block leaderboard">
 
@@ -43,47 +47,51 @@
 
 			$lastGame = selectLastGame($player['id']);
 
-			if ($lastGame['winner'] == $player['id']) {
-				$lastGameResult = 'is--winner';
-			}
-			elseif ($lastGame['loser'] == $player['id']) {
-				$lastGameResult = 'is--loser';
-			}
+			if ($lastGame['datetime'] > $oneMonthAgo) {
+			
+				if ($lastGame['winner'] == $player['id']) {
+					$lastGameResult = 'is--winner';
+				}
+				elseif ($lastGame['loser'] == $player['id']) {
+					$lastGameResult = 'is--loser';
+				}
 
-			if ($player['id'] == $you['id']) {
-				$isYou = 'is--you';
-			}
-			else {
-				$isYou = '';
-			}
-			
-			echo '<li><a href="player.php?player=' .$player['id']. '" class="g3 slate is--position ' .$lastGameResult. ' is--level' . $playerStats['levelId']. ' ' .$isYou. '">
-			
-				<div class="base"></div>
+				if ($player['id'] == $you['id']) {
+					$isYou = 'is--you';
+				}
+				else {
+					$isYou = '';
+				}
 				
-				<div class="col1">';
+				echo '<li><a href="player.php?player=' .$player['id']. '" class="g3 slate is--position ' .$lastGameResult. ' is--level' . $playerStats['levelId']. ' ' .$isYou. '">
 				
-				playerPhoto($player['id']);
-				
-				echo '
-				</div>
-				
-				<header class="col2 player-info">
-					<h1>' .$player['name']. '</h1>
-					<h2 class="player-level">' .$playerStats['level']. '</h2>
-				</header>
-				
-				<aside class="col3 player-rating">
-					<h3>' .$playerStats['rating']. '</h3>
+					<div class="base"></div>
+					
+					<div class="col1">';
+					
+					playerPhoto($player['id']);
+					
+					echo '
+					</div>
+					
+					<header class="col2 player-info">
+						<h1>' .$player['name']. '</h1>
+						<h2 class="player-level">' .$playerStats['level']. '</h2>
+					</header>
+					
+					<aside class="col3 player-rating">
+						<h3>' .$playerStats['rating']. '</h3>
 
-					<figure class="position-triangle">'
-					.file_get_contents('src/img/position-triangle.svg').
-					'</figure>
-				</aside>
+						<figure class="position-triangle">'
+						.file_get_contents('src/img/position-triangle.svg').
+						'</figure>
+					</aside>
+					
+					';
 				
-				';
-			
-			echo '</a></li>';
+				echo '</a></li>';
+
+			}
 
 		}
 		
@@ -107,12 +115,14 @@
 
 		$matchesPlayed = countPlayersGames($player['id']);
 
+		$lastGame = selectLastGame($player['id']);
+
 		// haven't played 10 matches
-		if ($matchesPlayed < 10) {
+		if ($matchesPlayed < 10 or $lastGame['datetime'] < $oneMonthAgo  {
 
 			$playerStats = playerStats($player['id']);
 
-			$lastGame = selectLastGame($player['id']);
+			
 
 			if ($lastGame['winner'] == $player['id']) {
 				$lastGameResult = 'is--winner';

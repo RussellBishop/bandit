@@ -16,15 +16,27 @@ function playerPosition($id) {
 		
 	);
 
+	$oneMonthAgo = date("Y-m-d 00:00:00", strtotime('-1 month'));
+
 	$leaderboardPlayers = []; 
 
+
+
+
+
 	foreach ($players as $player) {
+
+		$lastGame = selectLastGame($player['id']);
 
 		$matchesPlayed = countPlayersGames($player['id']);
 
 		if ($matchesPlayed > 9 ) {
 
-			$leaderboardPlayers[] = $player['id'];
+			if ($lastGame['datetime'] > $oneMonthAgo) {
+
+				$leaderboardPlayers[] = $player['id'];
+
+			}
 
 		}
 	}
