@@ -69,6 +69,8 @@
 			'matches.winner-original-rating',
 			'matches.loser-original-rating',
 			'matches.difference',
+			'matches.winner-difference',
+			'matches.loser-difference',
 			'matches.winner-new-rating',
 			'matches.loser-new-rating',
 			'matches.dispute-message',
@@ -140,7 +142,7 @@
 			</a>
 			<h2 class="rating"><?=$match[0]['winner-original-rating']*5?></h2>
 
-			<div class="result">+<?=$match[0]['difference']*5?></div>
+			<div class="result">+<?=$match[0]['winner-difference']*5?></div>
 		</div>
 
 		<div class="player is--loser is--level<?=$loserStats['levelId']?>">
@@ -152,7 +154,7 @@
 
 			<h2 class="rating"><?=$match[0]['loser-original-rating']*5?></h2>
 
-			<div class="result">-<?=$match[0]['difference']*5?></div>
+			<div class="result">-<?=$match[0]['loser-difference']*5?></div>
 		</div>
 
 	</section>
@@ -182,106 +184,15 @@
 		</p>
 	</li>
 
-	<?php
-
-		if ($matchStatus == 'declined') {
-
-			?>
-
-			<li class="row is--disputed">
-
-				<h3 class="h4">Disputed by <?=$match[0]['loser-name']?>.</h4>
-
-				<?php if (!empty($match[0]['dispute-message'])) { ?>
-					<p class="quote">
-						<?=$match[0]['dispute-message'];?>
-					</p>
-				<?php } ?>
-
-			</li>
-
-			<?
-
-		}
-
-	?>
-
 	</ol>
 
-	<?php
-
-		if ($match[0]['sent-by'] == $you['id'] && $matchStatus == 'declined') {
-
-	?>
-
-		<form class="actions" method="post" action="<?=$actions.'cancelResult.php'?>">
+	<form class="actions" method="post" action="<?=$actions.'cancelResult.php'?>">
 						
 			<input type="hidden" name="match-id" value="<?=$match[0]['id']?>" />
 			
 			<button type="submit" class="button is--bad" name="delete">Cancel result</button>
 									
 		</form>
-
-	<?php
-
-		}
-
-	?>
-
-
-
-	<?php
-
-		if ($matchStatus == 'disputable') {
-
-			if ($match[0]['sent-by'] != $you['id']) {
-				// Not sent by me;
-
-				if ($match[0]['winner-id'] == $you['id'] || $match[0]['loser-id'] == $you['id']) {
-					// But I was in the game (I'm the opponent)
-
-					?>
-
-					<form class="actions" method="post" action="<?=$actions.'disputeResult.php'?>">
-						
-						<input type="hidden" name="match-id" value="<?=$match[0]['id']?>" />
-						
-						<input type="checkbox" id="dispute" class="toggle is--dispute" />
-						<label for="dispute" class="button is--bad">Dispute result</label>
-						
-						<div class="block toggled explain-dispute">
-							<textarea name="dispute-message"></textarea>
-							<button type="submit" class="is--bad" name="disputed">Send Dispute</button>
-						</div>
-						
-					</form>
-
-					<?
-
-				}
-			}
-
-			else {
-
-				// I sent this pending game!
-
-				?>
-
-				<form class="actions" method="post" action="<?=$actions.'cancelResult.php'?>">
-						
-						<input type="hidden" name="match-id" value="<?=$match[0]['id']?>" />
-						
-						<button type="submit" class="button is--bad" name="delete">Cancel result</button>
-												
-					</form>
-
-				<?php
-
-			}
-
-		}
-
-	?>
 
 	
 

@@ -29,7 +29,7 @@ $lastMatchDay = $lastMatchDayMorningDateTime->format('Y-m-d');
 $matchDays = array();
 
 // run 7 times
-for ($i=0; $i < 7; $i++) {
+for ($i=0; $i < 14; $i++) {
 
 	// clone the original date
 	$newDateTime = clone $lastMatchDayMorningDateTime;
@@ -67,11 +67,18 @@ foreach ($matchDays as $matchDay) {
 			'matches.loser',
 			'matches.accepted',
 			'matches.declined',
+
 			'matches.winner-original-rating',
-			'matches.loser-original-rating',
-			'matches.difference',
 			'matches.winner-new-rating',
+
+			'matches.loser-original-rating',
 			'matches.loser-new-rating',
+
+			'matches.winner-difference',
+			'matches.loser-difference',
+			'matches.difference',
+			
+			
 		],
 		
 		[
@@ -119,7 +126,7 @@ foreach ($matchDays as $matchDay) {
 							playerPhoto($match['winner-id']);
 							
 							echo '
-							<div class="difference">+<span class="count">'. $match['difference']*5 .'</span></div>
+							<div class="difference">+<span class="count">'. $match['winner-difference']*5 .'</span></div>
 						</div>
 						
 						<div class="col2 player is--b is--loser is--level'.$loserStats['levelId'].'">
@@ -131,7 +138,7 @@ foreach ($matchDays as $matchDay) {
 							playerPhoto($match['loser-id']);
 							
 							echo '
-							<div class="difference">-<span class="count">'. $match['difference']*5 .'</span></div>
+							<div class="difference">-<span class="count">'. $match['loser-difference']*5 .'</span></div>
 						</div>			
 
 					</a>
