@@ -14,7 +14,7 @@
 	
 ?>
 
-<h1 class="h1">You won against&hellip;</h1>
+<h1 class="h1">Who won?</h1>
 
 <form class="block table is--result" method="post" action="<?=$actions.'testResults.php';?>">
 
