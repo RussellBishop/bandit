@@ -101,39 +101,3 @@
 
 
 </ul>
-
-<?php
-
-	$ratingsArray = $database->select('matches',
-
-			[
-				'id',
-				'datetime',
-				'winner',
-				'loser',
-				'winner-original-rating',
-				'loser-original-rating',
-				'winner-new-rating',
-				'loser-new-rating',
-			],
-
-			[
-				'AND' => [
-					'accepted' => 1,
-					'declined' => 0,
-					"datetime[<]" => date("Y-m-d 00:00:00", strtotime('-30 days')),
-
-					'OR' => [
-						'winner' => $player['id'],
-						'loser' => $player['id']
-					],
-				],
-				
-				"ORDER" => "datetime ASC",
-			]
-			
-		);
-
-		print_r($ratingsArray);
-
-?>
