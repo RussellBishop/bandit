@@ -118,7 +118,7 @@
 		$lastGame = selectLastGame($player['id']);
 
 		// haven't played 10 matches
-		if ($matchesPlayed < 10 or $lastGame['datetime'] < $oneMonthAgo  {
+		if ($matchesPlayed < 10 or $lastGame['datetime'] < $oneMonthAgo) {
 
 			$playerStats = playerStats($player['id']);
 
@@ -138,7 +138,7 @@
 				$isYou = '';
 			}
 			
-			echo '<li><a href="player.php?player=' .$player['id']. '" class="g3 slate is--pending is--position ' .$lastGameResult. ' is--level' . $playerStats['levelId']. ' ' .$isYou. '">
+			echo '<li><a href="player.php?player=' .$player['id']. '" class="g3 slate is--pending is--position ' .$lastGameResult. ' is--level0' .$isYou. '">
 			
 				<div class="base"></div>
 				
@@ -151,11 +151,11 @@
 				
 				<header class="col2 player-info">
 					<h1>' .$player['name']. '</h1>
-					<h2 class="player-level">' .$playerStats['level']. '</h2>
+					<h2 class="player-level">Newcomer</h2>
 				</header>
 				
 				<aside class="col3 player-rating">
-					<h3>' .$playerStats['rating']. '</h3>
+					<h3>~</h3>
 				</aside>
 				
 				';
