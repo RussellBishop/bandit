@@ -112,15 +112,6 @@
 
 			$playerStats = playerStats($player['id']);
 
-			$lastGame = selectLastGame($player['id']);
-
-			if ($lastGame['winner'] == $player['id']) {
-				$lastGameResult = 'is--winner';
-			}
-			elseif ($lastGame['loser'] == $player['id']) {
-				$lastGameResult = 'is--loser';
-			}
-
 			if ($player['id'] == $you['id']) {
 				$isYou = 'is--you';
 			}
