@@ -5,7 +5,7 @@
 		$you = $database->get('players',
 		
 			[
-				'id', 'name', 'email', 'photo', 'rating'
+				'id', 'name', 'email', 'photo', 'rating', 'role'
 			],
 			
 			[
