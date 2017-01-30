@@ -52,3 +52,17 @@
 		}
 	}
 }
+
+.g5 {
+	@include clearfix;
+
+	> * {
+		&:first-child {
+			float: left;
+		}
+
+		&:last-child {
+			float: right;
+		}
+	}
+}

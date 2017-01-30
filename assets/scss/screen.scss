@@ -20,7 +20,7 @@
 @import "modules/prompt";
 
 @import "views/results"; /* only results page */
-@import "views/login"; /* only login page */
+// critical @import @import "views/login";
 @import "views/match"; /* only match page */
 @import "views/leaderboard"; /* only leaderboard page */
 
