@@ -11,13 +11,16 @@
 	
 	require($template.'header.php');
 	require($template.'navigation.php');
-	
-?>
 
-<?php
+$countGames = countGames();
 
+if ($countGames == 0) {
 
+	echo '<h1 class="h1">No games - get playing!</h1>';
 
+}
+
+else {
 
 // DateTime Object ( [date] => 2016-02-02 22:22:53.000000 [timezone_type] => 3 [timezone] => Europe/London )
 $lastMatchDayMorningDateTime = DateTime::createFromFormat('Y-m-d H:i:s', date("Y-m-d", strtotime($database->max("matches", "datetime"))) . '00:00:00');
@@ -47,7 +50,6 @@ foreach ($matchDays as $matchDay) {
 	$endOfMatchDay = clone $matchDay;
 	$endOfMatchDay->modify('+1 day -1 second');
 
-
 	// Select the matches
 	$matches = $database->select('matches',
 		[
@@ -70,14 +72,11 @@ foreach ($matchDays as $matchDay) {
 
 			'matches.winner-original-rating',
 			'matches.winner-new-rating',
+			'matches.winner-difference',
 
 			'matches.loser-original-rating',
 			'matches.loser-new-rating',
-
-			'matches.winner-difference',
 			'matches.loser-difference',
-			'matches.difference',
-			
 			
 		],
 		
@@ -110,39 +109,12 @@ foreach ($matchDays as $matchDay) {
 			else {
 				$isDisputed = '';
 			}
-			
-			echo '
-				<li>
-					<a href="/match.php?match='.$match['id'].'" class="g2 slate is--result'.$isDisputed.'">
-					
-						<div class="base"></div>
 
-						<div class="col1 player is--a is--winner is--level'.$winnerStats['levelId'].'">
-						
-							<figure class="position-triangle">'
-							.file_get_contents('src/img/position-triangle.svg').
-							'</figure>';
-							
-							playerPhoto($match['winner-id']);
-							
-							echo '
-							<div class="difference">+<span class="count">'. $match['winner-difference']*5 .'</span></div>
-						</div>
-						
-						<div class="col2 player is--b is--loser is--level'.$loserStats['levelId'].'">
-						
-							<figure class="position-triangle">'
-							.file_get_contents('src/img/position-triangle.svg').
-							'</figure>';
-							
-							playerPhoto($match['loser-id']);
-							
-							echo '
-							<div class="difference">-<span class="count">'. $match['loser-difference']*5 .'</span></div>
-						</div>			
+			echo '<li>';
 
-					</a>
-				</li>';
+			include($template.'matchSlab.php');
+
+			echo '</li>';
 			
 		}
 
@@ -152,14 +124,9 @@ foreach ($matchDays as $matchDay) {
 
 }
 
+
+}
 ?>
-
-
-
-
-
-
-
 
 <?php
 
