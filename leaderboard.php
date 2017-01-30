@@ -77,7 +77,7 @@
 					<h3>' .$playerStats['rating']. '</h3>
 
 					<figure class="position-triangle">'
-					.file_get_contents('src/img/position-triangle.svg').
+					.file_get_contents($root.'dist/img/position-triangle.svg').
 					'</figure>
 				</aside>
 				
@@ -97,7 +97,7 @@
 
 <article class="block leaderboard">
 
-	<h1 class="h1">Waiting&hellip;</h1>
+	<h1 class="h1">Waiting Area&hellip;</h1>
 
 	<ol>
 	
@@ -128,7 +128,7 @@
 				$isYou = '';
 			}
 			
-			echo '<li><a href="player.php?player=' .$player['id']. '" class="g3 slate is--pending is--position ' .$lastGameResult. ' is--level' . $playerStats['levelId']. ' ' .$isYou. '">
+			echo '<li><a href="player.php?player=' .$player['id']. '" class="g3 slate is--pending is--position ' .$lastGameResult. ' is--level0 ' .$isYou. '">
 			
 				<div class="base"></div>
 				
@@ -141,11 +141,11 @@
 				
 				<header class="col2 player-info">
 					<h1>' .$player['name']. '</h1>
-					<h2 class="player-level">' .$playerStats['level']. '</h2>
+					<h2 class="player-level">Waiting&hellip;</h2>
 				</header>
 				
 				<aside class="col3 player-rating">
-					<h3>' .$playerStats['rating']. '</h3>
+					<h3>&hellip;</h3>
 				</aside>
 				
 				';
