@@ -1,6 +1,6 @@
 <?php
 	
-	function winLossRatio($youId) {
+	function winLossRatio($id) {
 		
 		global $database;
 	
@@ -11,8 +11,9 @@
 			
 			[
 				'AND' => [
-					'winner' => $youId,
+					'winner' => $id,
 					'accepted' => '1',
+					'declined' => '0',
 				]
 			]
 		);
@@ -24,8 +25,9 @@
 			
 			[
 				'AND' => [
-					'loser' => $youId,
+					'loser' => $id,
 					'accepted' => '1',
+					'declined' => '0',
 				]
 			]
 		);
@@ -35,7 +37,7 @@
 		}
 		
 		else {
-			return '0';
+			return $wins;
 		}
 		
 	}
