@@ -1,5 +1,6 @@
 <?php
 
+	$url = $_SERVER['REQUEST_URI'];
 	$root = $_SERVER['DOCUMENT_ROOT'] . '/';			//			/
 	
 	$src = $root . 'src/';								//			/src/
@@ -7,11 +8,11 @@
 	$functions = $src . 'functions/';					//			/src/functions/
 	$template = $src . 'template/';						//			/src/template/
 
-	$css = '/src/css/';									//			/src/css/
-	
-	$img = '/src/img/';									//			/src/img/
-
-	$js = '/src/js/';									//			/src/js/
+	// where are the assets?
+	$dist = '/dist/';
+	$css = '/dist/css/';									//			/src/css/
+	$img = '/dist/img/';									//			/src/img/
+	$js = '/dist/js/';									//			/src/js/
 	
 	$upload = '/upload/';								//			/src/upload/
 	$uploadPlayerPhoto = $upload.'player-photo/';		//			/src/upload/player-photo/
