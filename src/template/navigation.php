@@ -1,50 +1,38 @@
 <?php
 	
-	$notifications = $database->count('matches',
-			
-		[
-			'AND' => [
-				'OR' => [
-					'winner' => $you['id'],
-					'loser' => $you['id']
-				],
-				'sent-by[!]' => $you['id'],
-				'accepted' => '0',
-				'declined' => '0',
-			]
-		]
-		
-	);
-
 	$playerStats = playerStats($you['id']);
 		
 ?>
 
-<nav class="menu">
+<nav class="menu g5">
+
+	<a class="menu__logo" href="/"><?php echo file_get_contents($root.'dist/img/logo.svg'); ?></a>
 
 	<label class="menu__toggle" data-toggles="menu">
 		<div class="player-photo-wrap is--level<?=$playerStats['levelId']?>"><?php playerPhoto($you['id']); ?></div>
-		<figure class="menu__icon"><?php if ($notifications>0) { echo '<span class="new">'.$notifications.'</span>'; } ?></span><?php echo file_get_contents('src/img/menu.svg'); ?></figure>
+		<figure class="menu__icon"><?php echo file_get_contents($root.'dist/img/menu.svg'); ?></figure>
 	</label>
 
-	<div class="fullscreen is--menu" data-is="menu">
+</nav>
+
+<div class="fullscreen is--menu" data-is="menu">
 
 		<label class="close" data-toggles="menu">X</label>
 
 		<ul>
 			<li class="<?php if ($view == 'profile') { echo 'is--open'; } ?>"><a href="/">My Profile</a></li>
 			<li class="<?php if ($view == 'add-win') { echo 'is--open'; } ?>"><a href="/add-win.php">Add Wins</a></li>
-			<li class="<?php if ($view == 'matches') { echo 'is--open'; } ?>"><a href="/matches.php">Matches<?php if ($notifications>0) { echo '  ('.$notifications.' new)'; } ?></a></li>
+			<li class="<?php if ($view == 'matches') { echo 'is--open'; } ?>"><a href="/matches.php">Matches</a></li>
 			<li class="<?php if ($view == 'leaderboard') { echo 'is--open'; } ?>"><a href="/leaderboard.php">Leaderboard</a></li>
 			<li class="<?php if ($view == 'account') { echo 'is--open'; } ?>"><a href="/account.php">Account</a></li>
+
+			<?php if ($you['role'] == 'admin') : ?><li class="<?php if ($view == 'invite-players') { echo 'is--open'; } ?>"><a href="/invite-player.php">Invite Players</a></li><?php endif; ?>
 		</ul>
 	</div>
-</nav>
 
 <?php
 
 	// show any prompts
-
 	$prompt = $_GET['prompt'];
 
 	if ($prompt == 'notfound') {
@@ -52,7 +40,15 @@
 	}
 
 	elseif ($prompt == 'disputed') {
-		echo '<aside class="prompt is--prompted is--warning is--inline block">Your dispute has been recorded. Hold tight.</aside>';
+		echo '<aside class="prompt is--prompted is--warning is--inline block">Your dispute has cancelled the result. Your opponent has been notified.</aside>';
+	}
+
+	elseif ($prompt == 'emailexists') {
+		echo '<aside class="prompt is--prompted is--warning is--inline block">This email address is already in use!</aside>';
+	}
+
+	elseif ($prompt == 'unfinishedform') {
+		echo '<aside class="prompt is--prompted is--warning is--inline block">Please fill in all of the fields.</aside>';
 	}
 
 ?>

@@ -1,4 +1,6 @@
 config.codekit
 *.css
 *.scssc
-/_backupSquelch20160227
+_backups/*
+node_modules/*
+dist/*

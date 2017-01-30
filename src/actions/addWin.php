@@ -15,9 +15,9 @@
 	// how many wins?
 	$winCount = $_POST['winCount'];
 
-	if ($winCount == 0) {
+	if ($winCount < 1) {
 
-		echo 'We cant add 0 wins.';
+		echo 'You can&rsquo;t add 0 wins.';
 		die;
 
 	}
@@ -29,32 +29,37 @@
 
 	}
 
+	$playerIds = [
+		'winnerId' => $winnerId,
+		'loserId' => $loserId
+	];
+
+	$getKFactors = getKFactors($playerIds);
 
 	// get players' last ratings
 	$winnerRatingToCalculate = playersRatingToCalculate($winnerId);
 	$loserRatingToCalculate = playersRatingToCalculate($loserId);
 
 
-	// calculate the difference
-	$rating = new Rating($winnerRatingToCalculate, $loserRatingToCalculate, 1, 0);
+	// calculate winner's new rating
+	$calculateWinner = new Rating($winnerRatingToCalculate, $loserRatingToCalculate, 1, 0, $getKFactors['winnerKFactor']);
 			
-		$results = $rating->getNewRatings();
+		$winnerResults = $calculateWinner->getNewRatings();
 		
-		$winnerNewRating = round($results['a']);
+		$winnerNewRating = round($winnerResults['a']);
 		
-		$difference = $winnerNewRating - $winnerRatingToCalculate;
+		$winnerDifference = $winnerNewRating - $winnerRatingToCalculate;
 
 
-
-		$expectedScore = $rating->getExpectedScores();
-		$odds = $expectedScore['a'];
-
-
-
-
-	
-
-
+	// calculate loser's new rating
+	$calculateLoser = new Rating($winnerRatingToCalculate, $loserRatingToCalculate, 1, 0, $getKFactors['loserKFactor']);
+			
+		$loserResults = $calculateLoser->getNewRatings();
+		
+		$loserNewRating = round($loserResults['b']);
+		
+		$loserDifference = $loserRatingToCalculate - $loserNewRating;
+		
 
 	// for every win against this player...
 	for ($i = 0; $i < $winCount; $i++) {
@@ -88,8 +93,9 @@
 			
 			);
 
-		$winnerNewLiveRating = $winnerData['rating'] + $difference;
-		$loserNewLiveRating = $loserData['rating'] - $difference;
+		$winnerNewLiveRating = $winnerData['rating'] + $winnerDifference;
+
+		$loserNewLiveRating = $loserData['rating'] - $loserDifference;
 
 
 
@@ -104,12 +110,13 @@
 			'loser'						=> $loserId,
 
 			'winner-original-rating'	=> $winnerData['rating'],
-			'loser-original-rating'		=> $loserData['rating'],
-
-			'difference'				=> $difference,
-			
 			'winner-new-rating'			=> $winnerNewLiveRating,
+
+			'loser-original-rating'		=> $loserData['rating'],			
 			'loser-new-rating'			=> $loserNewLiveRating,
+
+			'winner-difference'			=> $winnerDifference,
+			'loser-difference'			=> $loserDifference,
 
 			'accepted'					=> '1'
 
@@ -121,7 +128,7 @@
 		$database->update('players',
 		
 			[
-				'rating[+]' => $difference
+				'rating[+]' => $winnerDifference
 			],
 			
 			[
@@ -135,7 +142,7 @@
 		$database->update('players',
 		
 			[
-				'rating[-]' => $difference
+				'rating[-]' => $loserDifference
 			],
 			
 			[
@@ -143,15 +150,6 @@
 			]
 			
 		);
-
-		$to      = 'hey@russellbishop.co.uk';
-		$subject = 'New result sent by '.$you['id'];
-		$message = 'New Bandit Match: <a href="'.$_SERVER['DOCUMENT_ROOT'].'/match.php?match='.$newResult.'"></a>';
-		$headers = 'From: noreply@russellbishop.co.uk' . "\r\n" .
-		    'Reply-To: noreply@russellbishop.co.uk' . "\r\n" .
-		    'X-Mailer: PHP/' . phpversion();
-
-		mail($to, $subject, $message, $headers);
 
 	}
 

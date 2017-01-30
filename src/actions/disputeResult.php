@@ -23,7 +23,6 @@
 			'sent-datetime',
 			'winner',
 			'loser',
-			'difference',
 			'winner-original-rating',
 			'loser-original-rating',
 			'winner-new-rating',
@@ -65,56 +64,7 @@
 		    'Reply-To: noreply@russellbishop.co.uk' . "\r\n" .
 		    'X-Mailer: PHP/' . phpversion();
 
-		mail($to, $subject, $message, $headers);
-
-	    /*
-
-	    // Update Winner Rating
-		$database->update('players',
-		
-			[
-				'rating[-]' => $matchData['difference']
-			],
-			
-			[
-				'id' => $matchData['winner']
-			]
-			
-		);
-		
-		
-		// Update Loser Rating
-		$database->update('players',
-		
-			[
-				'rating[+]' => $matchData['difference']
-			],
-			
-			[
-				'id' => $matchData['loser']
-			]
-			
-		);
-	    
-	    // Update Match to Declined and add message
-		$database->update('matches',
-		
-			[
-				'dispute-message' => $disputeMessage,
-				'accepted' => '0',
-				'declined' => '1',
-				'winner-new-rating' => $matchData['winner-original-rating'],
-				'loser-new-rating' => $matchData['loser-original-rating']
-			],
-			
-			[
-				'id' => $matchId
-			]
-			
-		);
-
-		*/
-	    
+		mail($to, $subject, $message, $headers);	    
 		
 		header('Location: /matches.php?prompt=disputed');
 

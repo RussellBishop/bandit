@@ -19,9 +19,11 @@
 			'loser',
 			'difference',
 			'winner-original-rating',
-			'loser-original-rating',
 			'winner-new-rating',
-			'loser-new-rating'
+			'loser-original-rating',
+			'loser-new-rating',
+			'winner-difference',
+			'loser-difference'
 		],
 		
 		[
@@ -41,7 +43,7 @@
 		$database->update('players',
 		
 			[
-				'rating[-]' => $matchData['difference']
+				'rating[-]' => $matchData['winner-difference']
 			],
 			
 			[
@@ -55,7 +57,7 @@
 		$database->update('players',
 		
 			[
-				'rating[+]' => $matchData['difference']
+				'rating[+]' => $matchData['loser-difference']
 			],
 			
 			[

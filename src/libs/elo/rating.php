@@ -13,11 +13,6 @@ class Rating
 {
 
     /**
-     * @var int The K Factor used.
-     */
-    const KFACTOR = 24;
-
-    /**
      * Protected & private variables.
      */
     protected $_ratingA;
@@ -32,6 +27,8 @@ class Rating
     protected $_newRatingA;
     protected $_newRatingB;
 
+    protected $_KFactor;
+
     /**
      * Costructor function which does all the maths and stores the results ready
      * for retrieval.
@@ -41,18 +38,19 @@ class Rating
      * @param int Score of A
      * @param int Score of B
      */
-    public function  __construct($ratingA,$ratingB,$scoreA,$scoreB)
+    public function  __construct($ratingA,$ratingB,$scoreA,$scoreB,$KFactor)
     {
         $this->_ratingA = $ratingA;
         $this->_ratingB = $ratingB;
         $this->_scoreA = $scoreA;
         $this->_scoreB = $scoreB;
+        $this->_KFactor = $KFactor;
 
         $expectedScores = $this -> _getExpectedScores($this -> _ratingA,$this -> _ratingB);
         $this->_expectedA = $expectedScores['a'];
         $this->_expectedB = $expectedScores['b'];
 
-        $newRatings = $this ->_getNewRatings($this -> _ratingA, $this -> _ratingB, $this -> _expectedA, $this -> _expectedB, $this -> _scoreA, $this -> _scoreB);
+        $newRatings = $this ->_getNewRatings($this -> _ratingA, $this -> _ratingB, $this -> _expectedA, $this -> _expectedB, $this -> _scoreA, $this -> _scoreB, $this -> _KFactor);
         $this->_newRatingA = $newRatings['a'];
         $this->_newRatingB = $newRatings['b'];
     }
@@ -65,18 +63,19 @@ class Rating
      * @param int Score of A
      * @param int Score of B
      */
-    public function setNewSettings($ratingA,$ratingB,$scoreA,$scoreB)
+    public function setNewSettings($ratingA,$ratingB,$scoreA,$scoreB,$KFactor)
     {
         $this -> _ratingA = $ratingA;
         $this -> _ratingB = $ratingB;
         $this -> _scoreA = $scoreA;
         $this -> _scoreB = $scoreB;
+        $this -> _KFactor = $KFactor;
 
         $expectedScores = $this -> _getExpectedScores($this -> _ratingA,$this -> _ratingB);
         $this -> _expectedA = $expectedScores['a'];
         $this -> _expectedB = $expectedScores['b'];
 
-        $newRatings = $this ->_getNewRatings($this -> _ratingA, $this -> _ratingB, $this -> _expectedA, $this -> _expectedB, $this -> _scoreA, $this -> _scoreB);
+        $newRatings = $this ->_getNewRatings($this -> _ratingA, $this -> _ratingB, $this -> _expectedA, $this -> _expectedB, $this -> _scoreA, $this -> _scoreB, $this -> _KFactor);
         $this -> _newRatingA = $newRatings['a'];
         $this -> _newRatingB = $newRatings['b'];
     }
@@ -118,10 +117,10 @@ class Rating
         );
     }
 
-    protected function _getNewRatings($ratingA,$ratingB,$expectedA,$expectedB,$scoreA,$scoreB)
+    protected function _getNewRatings($ratingA,$ratingB,$expectedA,$expectedB,$scoreA,$scoreB,$KFactor)
     {
-        $newRatingA = $ratingA + ( self::KFACTOR * ( $scoreA - $expectedA ) );
-        $newRatingB = $ratingB + ( self::KFACTOR * ( $scoreB - $expectedB ) );
+        $newRatingA = $ratingA + ( $KFactor * ( $scoreA - $expectedA ) );
+        $newRatingB = $ratingB + ( $KFactor * ( $scoreB - $expectedB ) );
 
         return array (
             'a' => $newRatingA,
