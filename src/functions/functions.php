@@ -11,6 +11,7 @@
 	require_once($functions.'playerPhoto.php');
 	require_once($functions.'playerPhotoInline.php');
 	
+	require_once($functions.'countGames.php');
 	require_once($functions.'countPlayersGames.php');
 	require_once($functions.'countPlayersGamesBeforeToday.php');
 	require_once($functions.'selectLastGame.php');
