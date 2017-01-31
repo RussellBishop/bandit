@@ -6,7 +6,6 @@ function playerStats($id) {
 
 	$matchesPlayed = countPlayersGames($id);
 
-	/*
 	// played less than 10 games?
 	if ($matchesPlayed < 10) {
 
@@ -20,8 +19,6 @@ function playerStats($id) {
 
 	// played atleast 10 games
 	else {
-
-		*/
 
 		$player = $database->get('players',
 			[
@@ -189,11 +186,7 @@ function playerStats($id) {
 				
 			}
 
-
-			/*
 		}
-
-		*/
 
 	}
 	

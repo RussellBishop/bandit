@@ -5,38 +5,53 @@
 	require_once($functions.'functions.php');
 	
 	
-	
 	$matchId = $_POST['match-id'];
 
 	
 	// Get the match info
 	$matchData = $database->get('matches',
-	
 		[
-			'id',
-			'sent-datetime',
-			'winner',
-			'loser',
-			'difference',
-			'winner-original-rating',
-			'winner-new-rating',
-			'loser-original-rating',
-			'loser-new-rating',
-			'winner-difference',
-			'loser-difference'
+			'[><]players (sent-by)' => ['sent-by' => 'id'],
+			'[><]players (winner)' => ['winner' => 'id'],
+			'[><]players (loser)' => ['loser' => 'id']
 		],
 		
 		[
-			'id' => $matchId
+			'matches.id',
+			'matches.datetime',
+			'matches.sent-by',
+			'matches.sent-datetime',
+			'winner.id(winner-id)',
+			'loser.id(loser-id)',
+			'winner.name(winner-name)',
+			'loser.name(loser-name)',
+			'matches.winner',
+			'matches.loser',
+			'matches.accepted',
+			'matches.declined',
+
+			'matches.winner-original-rating',
+			'matches.winner-new-rating',
+			'matches.winner-difference',
+
+			'matches.loser-original-rating',
+			'matches.loser-new-rating',
+			'matches.loser-difference',
+
+			'matches.dispute-message',
+		],
+		
+		[
+			'matches.id' => $matchId
 		]
 	);
 
 
 	$dateSentPeriod = new DateTime($matchData['sent-datetime']);
-	$dateSentPeriod->modify("+24 hours");
+	$allottedTime = $dateSentPeriod->modify("+24 hours");
 
 	
-	if (date("Y-m-d H:i:s") < $dateSentPeriod) {
+	if (date("Y-m-d H:i:s") < $allottedTime) {
 
 
 	    // Update Winner Rating
