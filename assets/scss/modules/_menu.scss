@@ -63,9 +63,9 @@
 }
 
 .fullscreen.is--menu {
-	background: linear-gradient(135deg,  $bandit 0%, #fd463e 100%);
-	color: $white; @include text-shadow1;
-	transform: translateX(-100%);
+	// background: linear-gradient(135deg,  $bandit 0%, #fd463e 100%);
+	color: $bandit; @include text-shadow1;
+	transform: translateX(100%);
 	transition: all .3s ease;
 
 	&.is--toggled {
@@ -76,17 +76,24 @@
 	.close {
 		position: absolute; top: 0; right: 0;
 		width: $close__size; height: $close__size;
-		font-size: 16px; font-weight: bold; line-height: $close__size; text-align: center;
+		font-size: 21px; font-weight: bold; line-height: $close__size; text-align: center;
 	}
 
 	ul {
 		margin-top: $close__size*1.5;
 	}
 
+	$border: 1px solid rgba($light, .2);
 	li {
 		&.is--open {
 			a {
-				border-left: 12px solid $shadow;
+				color: #ddd;
+			}
+		}
+
+		&:last-child {
+			a {
+				border-bottom: $border;
 			}
 		}
 	}
@@ -94,6 +101,6 @@
 	a {
 		display: block; padding: 24px 10%; max-height: 100px;
 		font-size: 20px; color: inherit;
-		border-top: 1px solid rgba($light, .3); border-bottom: 1px solid rgba($shadow, .3);
+		border-top: $border; 
 	}
 }
