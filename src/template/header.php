@@ -12,6 +12,15 @@
 <?php echo file_get_contents($root.'dist/css/critical.css'); ?>
 </style>
 
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#000207">
+
+<link rel="shortcut icon" href="/favicon.ico?2=yes">
+<link rel="shortcut icon" sizes="192x192" href="/favicon@196w.png">
+<link rel="shortcut icon" sizes="128x128" href="/favicon@128w.png">
+<link rel="apple-touch-icon" sizes="128x128" href="/favicon@128w.png">
+
 <link href="<?=$css?>screen.css" type="text/css" rel="stylesheet" />
 
 </head>

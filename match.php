@@ -45,7 +45,7 @@
 <?php
 
 	
-	$match = $database->select('matches',
+	$match = $database->get('matches',
 		[
 			'[><]players (sent-by)' => ['sent-by' => 'id'],
 			'[><]players (winner)' => ['winner' => 'id'],
@@ -66,13 +66,15 @@
 			'matches.loser',
 			'matches.accepted',
 			'matches.declined',
+
 			'matches.winner-original-rating',
-			'matches.loser-original-rating',
-			'matches.difference',
-			'matches.winner-difference',
-			'matches.loser-difference',
 			'matches.winner-new-rating',
+			'matches.winner-difference',
+
+			'matches.loser-original-rating',
 			'matches.loser-new-rating',
+			'matches.loser-difference',
+
 			'matches.dispute-message',
 		],
 		
@@ -86,9 +88,9 @@
 <?php
 
 	// 1 day after it was sent
-	$dateSentPeriod = date('Y-m-d H:i:s', strtotime($match[0]['sent-datetime'] . '+1 day'));
+	$dateSentPeriod = date('Y-m-d H:i:s', strtotime($match['sent-datetime'] . '+1 day'));
 
-	if ($match[0]['accepted'] == 1 && $match[0]['declined'] == 0) {
+	if ($match['accepted'] == 1 && $match['declined'] == 0) {
 
 		if (date("Y-m-d H:i:s") > $dateSentPeriod) {
 
@@ -105,7 +107,7 @@
 
 	}
 
-	elseif ($match[0]['declined'] == 1) {
+	elseif ($match['declined'] == 1) {
 
 		$matchStatus = 'declined';
 
@@ -129,56 +131,44 @@
 
 		<?php
 
-			$winnerStats = playerStats($match[0]['winner-id']);
-			$loserStats = playerStats($match[0]['loser-id']);
+			$winnerStats = playerStats($match['winner-id']);
+			$loserStats = playerStats($match['loser-id']);
 
 		?>
 
 		<div class="player is--winner is--level<?=$winnerStats['levelId']?>">
 
-			<a href="player.php?player=<?=$match[0]['winner-id']?>">
-				<?php playerPhoto($match[0]['winner-id']); ?>
-				<h1 class="name"><?=$match[0]['winner-name']?></h1>
+			<a href="player.php?player=<?=$match['winner-id']?>">
+				<?php playerPhoto($match['winner-id']); ?>
+				<h1 class="name"><?=$match['winner-name']?></h1>
 			</a>
-			<h2 class="rating"><?=$match[0]['winner-original-rating']*5?></h2>
+			<h2 class="rating"><?=$match['winner-original-rating']*5?></h2>
 
-			<div class="result">+<?=$match[0]['winner-difference']*5?></div>
+			<div class="result">+<?=$match['winner-difference']*5?></div>
 		</div>
 
 		<div class="player is--loser is--level<?=$loserStats['levelId']?>">
 
-			<a href="player.php?player=<?=$match[0]['loser-id']?>">
-				<?php playerPhoto($match[0]['loser-id']); ?>
-				<h1 class="name"><?=$match[0]['loser-name']?></h1>
+			<a href="player.php?player=<?=$match['loser-id']?>">
+				<?php playerPhoto($match['loser-id']); ?>
+				<h1 class="name"><?=$match['loser-name']?></h1>
 			</a>
 
-			<h2 class="rating"><?=$match[0]['loser-original-rating']*5?></h2>
+			<h2 class="rating"><?=$match['loser-original-rating']*5?></h2>
 
-			<div class="result">-<?=$match[0]['loser-difference']*5?></div>
+			<div class="result">-<?=$match['loser-difference']*5?></div>
 		</div>
 
 	</section>
 
 	<ol class="block table">
-	
-	<li class="row">
-		<h3 class="h4">Sent:</h4>
-		<p>
-		<?php
-
-			echo timeSince(strtotime($match[0]['sent-datetime'])) . ' ago';
-
-		?> 
-		</p>
-
-	</li>
 
 	<li class="row">
 		<h3 class="h4">Game Played:</h4>
 		<p>
 		<?php
 
-			echo timeSince(strtotime($match[0]['datetime'])) . ' ago';
+			echo timeSince(strtotime($match['datetime'])) . ' ago';
 
 		?> 
 		</p>
@@ -188,7 +178,7 @@
 
 	<form class="actions" method="post" action="<?=$actions.'cancelResult.php'?>">
 						
-			<input type="hidden" name="match-id" value="<?=$match[0]['id']?>" />
+			<input type="hidden" name="match-id" value="<?=$match['id']?>" />
 			
 			<button type="submit" class="button is--bad" name="delete">Cancel result</button>
 									

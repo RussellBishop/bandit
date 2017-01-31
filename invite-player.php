@@ -1,10 +1,5 @@
 <?php
 
-	if ($you['role'] !== 'admin') {
-		http_response_code(404);
-		die;
-	}
-
 	$view = 'invite-player';
 
 	require_once('src/config.php');
@@ -13,6 +8,11 @@
 	require_once($data.'ratings.php');
 		
 	require_once($functions.'functions.php');
+
+	if ($you['role'] !== 'admin') {
+		http_response_code(404);
+		die;
+	}
 	
 	require($template.'header.php');
 	require($template.'navigation.php');
