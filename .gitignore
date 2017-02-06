@@ -4,6 +4,6 @@ config.codekit
 _backups/*
 node_modules/*
 dist/*
-src/data/database.php
 
+src/data/database.php
 src/club.php

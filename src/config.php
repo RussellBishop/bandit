@@ -1,7 +1,7 @@
 <?php
 
 	$url = $_SERVER['REQUEST_URI'];
-	$root = $_SERVER['DOCUMENT_ROOT'] . '/';			//			/
+	$root = $_SERVER['DOCUMENT_ROOT'] . '/';
 	
 	$src = $root . 'src/';								//			/src/
 	$data = $src . 'data/';								//			/src/data/
@@ -21,10 +21,16 @@
 	
 	date_default_timezone_set('Europe/London');
 	
-	// load medoo and get database info
+	// load medoo
 	require_once($src.'libs/medoo/medoo.php');
+
+	// get db info
 	require_once($data.'database.php');
 
+	// get club info
+	require_once($src.'club.php');
+
+	// authenticate this user
 	require_once($src.'auth/authenticate.php');
 
 ?>
