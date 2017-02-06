@@ -1,0 +1,1 @@
+$(function(){$(document).on("click","[data-opens]",function(){console.log("clicked a popup opener");var p=$(this).data("opens-popup")}),$(".popup-launch").click(function(p){$(".popup-"+type).addClass("popup-open"),p.stopPropagation()})});

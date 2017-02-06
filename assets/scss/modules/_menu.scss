@@ -1,0 +1,106 @@
+.menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: 100%;
+	padding: 12px 16px;
+	background: $shadow;
+	
+	&__toggle {
+		@include clearfix; cursor: pointer;
+		display: block;
+		// position: fixed; top: 0;
+		text-transform: uppercase;
+		// border-radius: 0 0 6px 6px; box-shadow: 0px 1px 1px 0px $shadow, 0px 2px 5px 0px rgba($steel-gray, .1);
+	}
+
+	&__logo {
+		display: block;
+		width: 44px;
+
+		svg {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	&__icon, .player-photo-wrap {
+		@include inline-middle;
+	}
+
+	&__icon {
+		position: relative;
+
+		.new {
+			$size: 16px;
+			@include absolute-centre; left: 100%;
+			display: block; width: $size; height: $size;
+			background: $bandit;
+			color: $white; line-height: $size; text-align: center; font-size: 12px; @include text-shadow1;
+			border-radius: 50%;
+		}
+
+		svg {
+			display: block;
+		}
+	}
+
+	.player-photo-wrap {
+		width: 26px; margin-right: 4px;
+	}
+
+	.player-photo {
+		&:after {
+			font-size: 11px;
+		}
+
+		.photo-border {
+			border-width: 2px;
+		}
+	}
+}
+
+.fullscreen.is--menu {
+	// background: linear-gradient(135deg,  $bandit 0%, #fd463e 100%);
+	color: $bandit; @include text-shadow1;
+	transform: translateX(100%);
+	transition: all .3s ease;
+
+	&.is--toggled {
+		transform: translateX(0%);
+	}
+
+	$close__size: 40px;
+	.close {
+		position: absolute; top: 0; right: 0;
+		width: $close__size; height: $close__size;
+		font-size: 21px; font-weight: bold; line-height: $close__size; text-align: center;
+	}
+
+	ul {
+		margin-top: $close__size*1.5;
+	}
+
+	$border: 1px solid rgba($light, .2);
+	li {
+		&.is--open {
+			a {
+				color: #ddd;
+			}
+		}
+
+		&:last-child {
+			a {
+				border-bottom: $border;
+			}
+		}
+	}
+
+	a {
+		display: block; padding: 24px 10%; max-height: 100px;
+		font-size: 20px; color: inherit;
+		border-top: $border; 
+	}
+}

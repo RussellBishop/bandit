@@ -1,0 +1,253 @@
+.player-card {
+	border: 2px solid $default;
+	border-radius: 3px;
+	
+	.go-to-account {
+		position: relative;
+		display: block;
+	}
+	
+	.player {
+		
+		&-identity {
+			padding: 25px 0;
+			text-align: center;
+			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($default,.1) 50%);
+		}
+		
+		&-photo {
+			$width: 150px;
+			display: inline-block; width: $width; height: $width*1.133; padding-bottom: 0;
+			
+			&:after {
+				font-size: 44px;
+			}
+			
+			.photo-border {
+				border-width: 8px;
+			}
+		}
+		
+		&-name {
+			@include jump-responsive(margin-bottom, .5);
+			text-align: center;	
+		}
+		
+		&-level {
+			position: absolute; bottom: 0; left: 50%; z-index: 10;
+			padding: 0 16px;
+			line-height: 32px; font-weight: bold; font-size: 16px; color: $zircon; @include text-shadow1;
+			background: $default;
+			box-shadow: 0px 1px 1px 0px $shadow, 0px 2px 5px 0px rgba($steel-gray,0.28); border-radius: 6px; transform: translate(-50%, 0);
+		}
+
+		&-stats, &-levelUp {
+			padding-top: 15px; padding-bottom: 15px;
+			background-color: $charade-2; border-top: 2px solid $default;
+			color: $cadet-blue;
+		}
+		
+		&-stats {
+			text-align: center; line-height: 1; 
+
+			a {
+				color: inherit;
+			}
+			
+			dt {
+				margin-bottom: 4px;
+			}
+			
+			dd {
+				font-size: 22px; line-height: 1; color: $zircon;
+			}
+	
+		}
+
+		&-levelUp {
+			position: relative;
+			padding-left: 15px; padding-right: 15px;
+
+			.progress {
+				position: absolute; top: 0; left: 0; bottom: 0; opacity: .2; z-index: 1;
+			}
+
+			&.is--level1 {
+				.level-name {
+					color: $level1;
+				}
+
+				.progress {
+					background-color: $level1;
+				}
+			}
+
+			&.is--level2 {
+				.level-name {
+					color: $level2;
+				}
+
+				.progress {
+					background-color: $level2;
+				}
+			}
+
+			&.is--level3 {
+				.level-name {
+					color: $level3;
+				}
+
+				.progress {
+					background-color: $level3;
+				}
+			}
+
+			&.is--level4 {
+				.level-name {
+					color: $level4;
+				}
+
+				.progress {
+					background-color: $level4;
+				}
+			}
+
+			&.is--level5 {
+				.level-name {
+					color: $level5;
+				}
+
+				.progress {
+					background-color: $level5;
+				}
+			}
+		}
+		
+	}
+	
+	&.is--level1 {
+		// border-color: $level1;
+		
+		.player-identity {
+			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level1,.1) 50%);
+		}
+		
+		.player-level {
+			background-color: $level1;
+		}
+				
+		.player-stats {
+			// border-color: $level1;
+		}
+		
+	}
+
+	&.is--level2 {
+		// border-color: $level2;
+		
+		.player-identity {
+			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level2,.1) 50%);
+		}
+		
+		.player-level {
+			background-color: $level2;
+		}
+		
+		.player-stats {
+			// border-color: $level2;
+		}
+		
+	}
+
+	&.is--level3 {
+		// border-color: $level3;
+		
+		.player-identity {
+			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level3,.1) 50%);
+		}
+		
+		.player-level {
+			background-color: $level3;
+		}
+		
+		.player-stats {
+			// border-color: $level3;
+		}
+		
+	}
+
+	&.is--level4 {
+		// border-color: $level4;
+		
+		.player-identity {
+			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level4,.1) 50%);
+		}
+		
+		.player-level {
+			background-color: $level4;
+		}
+		
+		.player-stats {
+			// border-color: $level4;
+		}
+		
+	}
+
+	&.is--level5 {
+		// border-color: $level5;
+		
+		.player-identity {
+			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level5,.1) 50%);
+		}
+		
+		.player-level {
+			background-color: $level5;
+		}
+		
+		.player-stats {
+			border-color: $level5;
+		}
+		
+	}
+
+	&.is--level6 {
+		// border-color: $level6;
+		
+		.player-identity {
+			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level6,.1) 50%);
+		}
+		
+		.player-level {
+			background-color: $level6;
+		}
+		
+		.player-stats {
+			// border-color: $level6;
+		}
+		
+	}
+
+	&.is--level50 {
+		// border-color: $level50;
+		
+		.player-identity {
+			background: linear-gradient(150deg,  rgba(0,0,0,0) 50%,rgba($level50,.1) 50%);
+		}
+		
+		.player-level {
+			background-color: $level50;
+		}
+		
+		.player-photo {
+			.border {
+				fill: $level50;
+			}
+		}
+		
+		.player-stats {
+			// border-color: $level50;
+		}
+		
+	}
+	
+}

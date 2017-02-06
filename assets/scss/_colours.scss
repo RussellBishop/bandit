@@ -1,0 +1,61 @@
+
+$black: #000;
+$white: #fff;
+
+/**/
+
+$kashmir-blue: #4A6094;
+$charade: #2C3039;
+$charade-2: #20232C;
+$charade-3: #2E323B;
+$charade-4: #292D36;
+$bright-gray: #363A47;
+
+$tuna: #2F333D;
+$shark: #191C24;
+$steel-gray: #191B24;
+$oslo-gray: #848792;
+
+$link-water: #E4E9F7;
+$zircon: #F7FAFF;
+$cadet-blue: #AAB0BF;
+$cadet-blue2: #A6ADBF;
+
+$emerald: #2FCC63;
+$sea-green: #2D9255;
+
+$cinnibar: #E74C3C;
+$thunder: #35292F;
+
+/**/
+
+$default: $cadet-blue2;
+$level1: #3DEB9F;
+$level2: #FDD300;
+$level3: #3DEBE3;
+$level4: #167AFF;
+$level5: #CF5FFF;
+$level6: #FA2B7A;
+
+$level50: #FF6200;
+
+$bandit: $level50;
+
+
+/**/
+
+$win: $emerald;
+$win-dark: $sea-green;
+
+$loss: $cinnibar;
+$loss-dark: $thunder;
+
+/**/
+
+$light: $link-water;
+$shadow: $shark;
+
+$text: $link-water;
+
+$button: $bandit;
+$button-hover: lighten(saturate($button, 1), 3);

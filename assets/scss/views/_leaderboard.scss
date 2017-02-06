@@ -1,0 +1,231 @@
+.leaderboard {
+	
+	li:not(:last-child) {
+		@include jump-responsive(margin-bottom, .5);
+	}
+}
+
+.slate.is--position {
+	position: relative;
+	padding: 0 2%;
+	@include text-shadow1;
+
+	@media (min-width: 350px) {
+		padding: 0 5%;
+	}
+
+	.col1 {
+		margin-right: 8px;
+	}
+
+	.player {
+
+		&-photo {
+			$width: 60px;
+			width: $width; height: $width*1.133;
+
+			.photo-border {
+				border-width: 3px;
+			}
+		}
+
+		&-info {
+			position: relative;
+			font-size: 13px; font-weight: normal; line-height: 1.3;
+
+			h1 {
+				font-weight: 500;
+			}
+		}
+
+		&-level {
+			color: $default;
+		}
+
+		&-rating {
+			position: relative; top: 22px;
+			font-size: 23px; font-weight: normal;
+
+			h3, .position-triangle {
+				@include inline-middle;
+			}
+		}
+	}
+
+	&.is--winner {
+		.position-triangle {
+			#triangleUp {
+				fill: $win; fill-opacity: 1;
+			}
+		}
+	}
+
+	&.is--loser {
+		.position-triangle {
+			#triangleDown {
+				fill: $loss; fill-opacity: 1;
+			}
+		}
+	}
+
+	&.is--you {
+		color: $shadow; text-shadow: none;
+
+		h1, h2, h3 {
+			color: inherit !important;
+		}
+
+		&.is--winner, &.is--loser {
+			.position-triangle {
+
+				#triangleUp, #triangleDown {
+					fill: $shadow;
+				}
+			}
+		}
+
+		&.is--winner {
+			.position-triangle {
+				#triangleUp {
+					fill-opacity: 1;
+				}
+			}
+		}
+
+		&.is--loser {
+			.position-triangle {
+				#triangleDown {
+					fill-opacity: 1;
+				}
+			}
+		}
+	}
+
+	&.is--level0 {
+
+		&.is--you {
+			.base {
+				background-color: $default;
+			}
+		}
+
+	}
+
+	&.is--level1 {
+		#border {
+			fill: $level1;
+		}
+
+		.player-level {
+			color: $level1;
+		}
+
+		&.is--you {
+			.base {
+				background-color: $level1;
+			}
+		}
+	}
+
+	&.is--level2 {
+		#border {
+			fill: $level2;
+		}
+
+		.player-level {
+			color: $level2;
+		}
+
+		&.is--you {
+			.base {
+				background-color: $level2;
+			}
+		}
+	}
+
+	&.is--level3 {
+
+		#border {
+			fill: $level3;
+		}
+
+		.player-level {
+			color: $level3;
+		}
+
+		&.is--you {
+			.base {
+				background-color: $level3;
+			}
+		}
+	}
+
+	&.is--level4 {
+
+		#border {
+			fill: $level4;
+		}
+
+		.player-level {
+			color: $level4;
+		}
+
+		&.is--you {
+			.base {
+				background-color: $level4;
+			}
+		}
+	}
+
+	&.is--level5 {
+
+		#border {
+			fill: $level5;
+		}
+
+		.player-level {
+			color: $level5;
+		}
+
+		&.is--you {
+			.base {
+				background-color: $level5;
+			}
+		}
+	}
+
+	&.is--level6 {
+
+		#border {
+			fill: $level6;
+		}
+
+		.player-level {
+			color: $level6;
+		}
+
+		&.is--you {
+			.base {
+				background-color: $level6;
+			}
+		}
+	}
+
+	&.is--level50 {
+
+		#border {
+			fill: $level50;
+		}
+
+		.player-level {
+			color: $level50;
+		}
+
+		&.is--you {
+			.base {
+				background-color: $level50;
+			}
+		}
+	}
+
+}

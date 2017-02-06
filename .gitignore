@@ -1,0 +1,9 @@
+config.codekit
+*.css
+*.scssc
+_backups/*
+node_modules/*
+dist/*
+src/data/database.php
+
+src/club.php

@@ -1,0 +1,34 @@
+$font-avenir: 'Avenir Next', Avenir, sans-serif;
+$font-bariol: 'Bariol', 'Avenir Next', Avenir, sans-serif;
+
+body {
+	font-size: 13px; font-family: $font-avenir; line-height: #{percentage(26/16)}; color: $text; }
+	
+h1, h2, h3, h4, h5, h5 {
+	color: $white; font-weight: normal;
+}
+
+.h1 {
+	@include jump-responsive(margin-bottom, 1);
+	font-size: 25px; font-weight: 500; text-align: center;
+}
+
+.h2 {
+	font-size: 21px; font-weight: 500;
+}
+
+.h3 {
+	font-size: 16px; font-weight: 500;
+}
+
+.h4 {
+	font-size: 14px; font-weight: 500;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	color: $bandit;
+}
