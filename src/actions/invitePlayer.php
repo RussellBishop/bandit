@@ -1,6 +1,7 @@
 <?php
 	
 	require_once($_SERVER['DOCUMENT_ROOT'].'/src/config.php');
+	require_once($src.'club.php');
 	require_once($functions.'functions.php');
 
 	$playerName = $_POST['fullname'];
@@ -37,23 +38,30 @@
 
 	]);
 
-	$to      = $playerEmail;
-	$subject = 'Enter - Bandit Play';
-	$message =
+$to      = $playerEmail;
+$subject = 'Enter - Bandit Play';
+$message =
 
-	'You&rsquo;re in&hellip; sick!
+'<html>
+<head>
+<title>You&rsquo;re in - sick!</title>
+</head>
+<body>
+<h3>You&rsquo;re in&hellip; sick!</h3>
+<p>Your password is set to <b>'.$playerPassword.'</b> right now - I know, not your choice, but you can update it the moment you log in.</p>
+<p>Start adding your wins, build your rating, and levelling up.</p>
+<p>Your Bandit Club: <a href="'.$club['url'].'">'.$club['name'].'</a> '.$club['url'].'</p>';
 
-	Your password is set to '.$playerPassword.' right now - I know, not your choice, but you can update it the moment you log in.
+// To send HTML mail, the Content-type header must be set
+$headers[] = 'MIME-Version: 1.0';
+$headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
-	Log in and update your password, then start adding your wins, building your rating, and levelling up.
+// Additional headers
+$headers[] = 'To: '.$playerName.' <'.$playerEmail.'>';
+$headers[] = 'From: Bandit Play <noreply@banditplay.com>';
+$headers[] = 'Reply-To: Bandit Play <noreply@banditplay.com>';
 
-	Your Bandit Club: <a href="'.$_SERVER['REQUEST_URI'].'/"></a>';
-
-	$headers = 'From: noreply@russellbishop.co.uk' . "\r\n" .
-	    'Reply-To: noreply@russellbishop.co.uk' . "\r\n" .
-	    'X-Mailer: PHP/' . phpversion();
-
-	mail($to, $subject, $message, $headers);
+mail($to, $subject, $message, implode("\r\n", $headers));
 
 	// All done? Go to their profile
 	header('Location: /player.php?player='.$newPlayer);
