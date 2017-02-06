@@ -1,9 +1,0 @@
-html, body {
-	min-height: 100%;
-	background: $charade-3;
-}
-
-body {
-	overflow-x: hidden; overflow-y: auto;
-	max-width: 480px; margin: 0 auto; padding-top: 80px; padding-bottom: 30px; @include gutter;
-}

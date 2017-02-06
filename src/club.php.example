@@ -1,0 +1,10 @@
+<?php
+
+	$club = [
+	   'name' => 'Bandit',
+	   'subdomain' => 'subdomain',
+	   
+	   'url' => 'http://'.$_SERVER['SERVER_NAME'],
+	];
+	
+?>
